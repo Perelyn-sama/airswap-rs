@@ -1,29 +1,29 @@
-use crate::bindings::pool::pool::pool;
+use std::sync::Arc;
 use ethers::prelude::{builders::ContractCall, *};
-
+use crate::bindings::i_pool::i_pool::IPool;
 #[derive(Debug)]
 pub struct Pool<M> {
     /// The Pool Airswap contract.
-    pub contract: pool<M>,
+    pub contract: IPool<M>,
 }
 
 impl<M> Pool<M> {
     /// Returns a reference to the Airswap Pool contract.
-    pub fn contract(&self) -> &pool<M> {
+    pub fn contract(&self) -> &IPool<M> {
         &self.contract
     }
 }
 
-impl<M: Middleware> Seaport<M> {
+impl<M: Middleware> Pool<M> {
     /// Creates a new instance from using the provided address.
     pub fn new(client: Arc<M>, address: Address) -> Self {
-        let contract = seaport::new(address, client);
-        Self {contract}
+        let contract = IPool::new(address, client);
+        Self { contract }
     }
 
     /// Add admin address
     /// Only owner
-    pub fn add_admin(&self, _admin: Address) -> ContractCall<M,()> {
+    pub fn add_admin(&self, _admin: Address) -> ContractCall<M, ()> {
         let pool = self.contract();
         pool.add_admin(_admin)
     }
@@ -36,7 +36,7 @@ impl<M: Middleware> Seaport<M> {
     }
 
     /// Remove admin address
-    /// Only owner 
+    /// Only owner
     pub fn remove_admin(&self, _admin: Address) -> ContractCall<M, ()> {
         let pool = self.contract();
         pool.remove_admin(_admin)
@@ -74,10 +74,27 @@ impl<M: Middleware> Seaport<M> {
         let pool = self.contract();
         pool.transfer_ownership(new_owner)
     }
+
+    /// Withdraw tokens from the pool using a signed claim
+    pub fn withdraw(
+        &self,
+        recipient: Address,
+        minimum: U256,
+        token: Address,
+        nonce: U256,
+        expiry: U256,
+        score: U256,
+        v: u8,
+        r: [u8; 32],
+        s: [u8; 32],
+    ) -> ContractCall<M, U256> {
+        let pool = self.contract();
+        pool.withdraw(recipient, minimum, token, nonce, expiry, score, v, r, s)
+    }
 }
 
 impl<M> std::ops::Deref for Pool<M> {
-    type Target = pool<M>;
+    type Target = IPool<M>;
     fn deref(&self) -> &Self::Target {
         self.contract()
     }
