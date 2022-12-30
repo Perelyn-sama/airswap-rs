@@ -91,6 +91,23 @@ impl<M: Middleware> Pool<M> {
         let pool = self.contract();
         pool.withdraw(recipient, minimum, token, nonce, expiry, score, v, r, s)
     }
+
+    /// Withdraw tokens from the pool using signature and stake for a recipient
+    pub fn withdraw_and_stake(
+        &self,
+        recipient: Address,
+        minimum: U256,
+        token: Address,
+        nonce: U256,
+        expiry: U256,
+        score: U256,
+        v: u8,
+        r: [u8; 32],
+        s: [u8; 32],
+    ) -> ContractCall<M, U256> {
+        let pool = self.contract();
+        pool.withdraw_and_stake(recipient, minimum, token, nonce, expiry, score, v, r, s)
+    }
 }
 
 impl<M> std::ops::Deref for Pool<M> {
