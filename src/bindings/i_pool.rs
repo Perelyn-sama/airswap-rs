@@ -1,6 +1,6 @@
-pub use pool::*;
+pub use i_pool::*;
 #[allow(clippy::too_many_arguments, non_camel_case_types)]
-pub mod pool {
+pub mod i_pool {
     #![allow(clippy::enum_variant_names)]
     #![allow(dead_code)]
     #![allow(clippy::type_complexity)]
@@ -14,34 +14,34 @@ pub mod pool {
         types::*,
     };
     use ethers::providers::Middleware;
-    #[doc = "Pool was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
+    #[doc = "IPool was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
     use std::sync::Arc;
     # [rustfmt :: skip] const __ABI : & str = "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_scale\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_max\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_stakingContract\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_stakingToken\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"tokens\",\"type\":\"address[]\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"dest\",\"type\":\"address\"}],\"name\":\"DrainTo\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"max\",\"type\":\"uint256\"}],\"name\":\"SetMax\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"scale\",\"type\":\"uint256\"}],\"name\":\"SetScale\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"score\",\"type\":\"uint256\"}],\"name\":\"Withdraw\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"CLAIM_TYPEHASH\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DOMAIN_CHAIN_ID\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DOMAIN_NAME\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DOMAIN_SEPARATOR\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DOMAIN_TYPEHASH\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DOMAIN_VERSION\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_admin\",\"type\":\"address\"}],\"name\":\"addAdmin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"admins\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"score\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"calculate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"tokens\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"dest\",\"type\":\"address\"}],\"name\":\"drainTo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"max\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"participant\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"name\":\"nonceUsed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_admin\",\"type\":\"address\"}],\"name\":\"removeAdmin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"scale\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_max\",\"type\":\"uint256\"}],\"name\":\"setMax\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_scale\",\"type\":\"uint256\"}],\"name\":\"setScale\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_stakingContract\",\"type\":\"address\"}],\"name\":\"setStakingContract\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_stakingToken\",\"type\":\"address\"}],\"name\":\"setStakingToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stakingContract\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stakingToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"participant\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"score\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"verify\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"minimum\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"score\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"withdraw\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"minimum\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"score\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"withdrawAndStake\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]" ;
     #[doc = r" The parsed JSON-ABI of the contract."]
-    pub static POOL_ABI: ethers::contract::Lazy<ethers::core::abi::Abi> =
+    pub static IPOOL_ABI: ethers::contract::Lazy<ethers::core::abi::Abi> =
         ethers::contract::Lazy::new(|| {
             ethers::core::utils::__serde_json::from_str(__ABI).expect("invalid abi")
         });
-    pub struct Pool<M>(ethers::contract::Contract<M>);
-    impl<M> Clone for Pool<M> {
+    pub struct IPool<M>(ethers::contract::Contract<M>);
+    impl<M> Clone for IPool<M> {
         fn clone(&self) -> Self {
-            Pool(self.0.clone())
+            IPool(self.0.clone())
         }
     }
-    impl<M> std::ops::Deref for Pool<M> {
+    impl<M> std::ops::Deref for IPool<M> {
         type Target = ethers::contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
             &self.0
         }
     }
-    impl<M> std::fmt::Debug for Pool<M> {
+    impl<M> std::fmt::Debug for IPool<M> {
         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-            f.debug_tuple(stringify!(Pool))
+            f.debug_tuple(stringify!(IPool))
                 .field(&self.address())
                 .finish()
         }
     }
-    impl<M: ethers::providers::Middleware> Pool<M> {
+    impl<M: ethers::providers::Middleware> IPool<M> {
         #[doc = r" Creates a new contract instance with the specified `ethers`"]
         #[doc = r" client at the given `Address`. The contract derefs to a `ethers::Contract`"]
         #[doc = r" object"]
@@ -49,7 +49,7 @@ pub mod pool {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            ethers::contract::Contract::new(address.into(), POOL_ABI.clone(), client).into()
+            ethers::contract::Contract::new(address.into(), IPOOL_ABI.clone(), client).into()
         }
         #[doc = "Calls the contract's `CLAIM_TYPEHASH` (0x6b0509b1) function"]
         pub fn claim_typehash(&self) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
@@ -326,11 +326,11 @@ pub mod pool {
             self.0.event()
         }
         #[doc = r" Returns an [`Event`](#ethers_contract::builders::Event) builder for all events of this contract"]
-        pub fn events(&self) -> ethers::contract::builders::Event<M, PoolEvents> {
+        pub fn events(&self) -> ethers::contract::builders::Event<M, IPoolEvents> {
             self.0.event_with_filter(Default::default())
         }
     }
-    impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>> for Pool<M> {
+    impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>> for IPool<M> {
         fn from(contract: ethers::contract::Contract<M>) -> Self {
             Self(contract)
         }
@@ -419,14 +419,14 @@ pub mod pool {
         pub score: ethers::core::types::U256,
     }
     #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
-    pub enum PoolEvents {
+    pub enum IPoolEvents {
         DrainToFilter(DrainToFilter),
         OwnershipTransferredFilter(OwnershipTransferredFilter),
         SetMaxFilter(SetMaxFilter),
         SetScaleFilter(SetScaleFilter),
         WithdrawFilter(WithdrawFilter),
     }
-    impl ethers::contract::EthLogDecode for PoolEvents {
+    impl ethers::contract::EthLogDecode for IPoolEvents {
         fn decode_log(
             log: &ethers::core::abi::RawLog,
         ) -> ::std::result::Result<Self, ethers::core::abi::Error>
@@ -434,31 +434,31 @@ pub mod pool {
             Self: Sized,
         {
             if let Ok(decoded) = DrainToFilter::decode_log(log) {
-                return Ok(PoolEvents::DrainToFilter(decoded));
+                return Ok(IPoolEvents::DrainToFilter(decoded));
             }
             if let Ok(decoded) = OwnershipTransferredFilter::decode_log(log) {
-                return Ok(PoolEvents::OwnershipTransferredFilter(decoded));
+                return Ok(IPoolEvents::OwnershipTransferredFilter(decoded));
             }
             if let Ok(decoded) = SetMaxFilter::decode_log(log) {
-                return Ok(PoolEvents::SetMaxFilter(decoded));
+                return Ok(IPoolEvents::SetMaxFilter(decoded));
             }
             if let Ok(decoded) = SetScaleFilter::decode_log(log) {
-                return Ok(PoolEvents::SetScaleFilter(decoded));
+                return Ok(IPoolEvents::SetScaleFilter(decoded));
             }
             if let Ok(decoded) = WithdrawFilter::decode_log(log) {
-                return Ok(PoolEvents::WithdrawFilter(decoded));
+                return Ok(IPoolEvents::WithdrawFilter(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData)
         }
     }
-    impl ::std::fmt::Display for PoolEvents {
+    impl ::std::fmt::Display for IPoolEvents {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                PoolEvents::DrainToFilter(element) => element.fmt(f),
-                PoolEvents::OwnershipTransferredFilter(element) => element.fmt(f),
-                PoolEvents::SetMaxFilter(element) => element.fmt(f),
-                PoolEvents::SetScaleFilter(element) => element.fmt(f),
-                PoolEvents::WithdrawFilter(element) => element.fmt(f),
+                IPoolEvents::DrainToFilter(element) => element.fmt(f),
+                IPoolEvents::OwnershipTransferredFilter(element) => element.fmt(f),
+                IPoolEvents::SetMaxFilter(element) => element.fmt(f),
+                IPoolEvents::SetScaleFilter(element) => element.fmt(f),
+                IPoolEvents::WithdrawFilter(element) => element.fmt(f),
             }
         }
     }
@@ -847,7 +847,7 @@ pub mod pool {
         pub s: [u8; 32],
     }
     #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
-    pub enum PoolCalls {
+    pub enum IPoolCalls {
         ClaimTypehash(ClaimTypehashCall),
         DomainChainId(DomainChainIdCall),
         DomainName(DomainNameCall),
@@ -876,340 +876,340 @@ pub mod pool {
         Withdraw(WithdrawCall),
         WithdrawAndStake(WithdrawAndStakeCall),
     }
-    impl ethers::core::abi::AbiDecode for PoolCalls {
+    impl ethers::core::abi::AbiDecode for IPoolCalls {
         fn decode(
             data: impl AsRef<[u8]>,
         ) -> ::std::result::Result<Self, ethers::core::abi::AbiError> {
             if let Ok(decoded) =
                 <ClaimTypehashCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::ClaimTypehash(decoded));
+                return Ok(IPoolCalls::ClaimTypehash(decoded));
             }
             if let Ok(decoded) =
                 <DomainChainIdCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::DomainChainId(decoded));
+                return Ok(IPoolCalls::DomainChainId(decoded));
             }
             if let Ok(decoded) =
                 <DomainNameCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::DomainName(decoded));
+                return Ok(IPoolCalls::DomainName(decoded));
             }
             if let Ok(decoded) =
                 <DomainSeparatorCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::DomainSeparator(decoded));
+                return Ok(IPoolCalls::DomainSeparator(decoded));
             }
             if let Ok(decoded) =
                 <DomainTypehashCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::DomainTypehash(decoded));
+                return Ok(IPoolCalls::DomainTypehash(decoded));
             }
             if let Ok(decoded) =
                 <DomainVersionCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::DomainVersion(decoded));
+                return Ok(IPoolCalls::DomainVersion(decoded));
             }
             if let Ok(decoded) =
                 <AddAdminCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::AddAdmin(decoded));
+                return Ok(IPoolCalls::AddAdmin(decoded));
             }
             if let Ok(decoded) = <AdminsCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::Admins(decoded));
+                return Ok(IPoolCalls::Admins(decoded));
             }
             if let Ok(decoded) =
                 <CalculateCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::Calculate(decoded));
+                return Ok(IPoolCalls::Calculate(decoded));
             }
             if let Ok(decoded) =
                 <DrainToCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::DrainTo(decoded));
+                return Ok(IPoolCalls::DrainTo(decoded));
             }
             if let Ok(decoded) =
                 <GetChainIdCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::GetChainId(decoded));
+                return Ok(IPoolCalls::GetChainId(decoded));
             }
             if let Ok(decoded) = <MaxCall as ethers::core::abi::AbiDecode>::decode(data.as_ref()) {
-                return Ok(PoolCalls::Max(decoded));
+                return Ok(IPoolCalls::Max(decoded));
             }
             if let Ok(decoded) =
                 <NonceUsedCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::NonceUsed(decoded));
+                return Ok(IPoolCalls::NonceUsed(decoded));
             }
             if let Ok(decoded) = <OwnerCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::Owner(decoded));
+                return Ok(IPoolCalls::Owner(decoded));
             }
             if let Ok(decoded) =
                 <RemoveAdminCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::RemoveAdmin(decoded));
+                return Ok(IPoolCalls::RemoveAdmin(decoded));
             }
             if let Ok(decoded) =
                 <RenounceOwnershipCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::RenounceOwnership(decoded));
+                return Ok(IPoolCalls::RenounceOwnership(decoded));
             }
             if let Ok(decoded) = <ScaleCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::Scale(decoded));
+                return Ok(IPoolCalls::Scale(decoded));
             }
             if let Ok(decoded) = <SetMaxCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::SetMax(decoded));
+                return Ok(IPoolCalls::SetMax(decoded));
             }
             if let Ok(decoded) =
                 <SetScaleCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::SetScale(decoded));
+                return Ok(IPoolCalls::SetScale(decoded));
             }
             if let Ok(decoded) =
                 <SetStakingContractCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::SetStakingContract(decoded));
+                return Ok(IPoolCalls::SetStakingContract(decoded));
             }
             if let Ok(decoded) =
                 <SetStakingTokenCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::SetStakingToken(decoded));
+                return Ok(IPoolCalls::SetStakingToken(decoded));
             }
             if let Ok(decoded) =
                 <StakingContractCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::StakingContract(decoded));
+                return Ok(IPoolCalls::StakingContract(decoded));
             }
             if let Ok(decoded) =
                 <StakingTokenCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::StakingToken(decoded));
+                return Ok(IPoolCalls::StakingToken(decoded));
             }
             if let Ok(decoded) =
                 <TransferOwnershipCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::TransferOwnership(decoded));
+                return Ok(IPoolCalls::TransferOwnership(decoded));
             }
             if let Ok(decoded) = <VerifyCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::Verify(decoded));
+                return Ok(IPoolCalls::Verify(decoded));
             }
             if let Ok(decoded) =
                 <WithdrawCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::Withdraw(decoded));
+                return Ok(IPoolCalls::Withdraw(decoded));
             }
             if let Ok(decoded) =
                 <WithdrawAndStakeCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(PoolCalls::WithdrawAndStake(decoded));
+                return Ok(IPoolCalls::WithdrawAndStake(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData.into())
         }
     }
-    impl ethers::core::abi::AbiEncode for PoolCalls {
+    impl ethers::core::abi::AbiEncode for IPoolCalls {
         fn encode(self) -> Vec<u8> {
             match self {
-                PoolCalls::ClaimTypehash(element) => element.encode(),
-                PoolCalls::DomainChainId(element) => element.encode(),
-                PoolCalls::DomainName(element) => element.encode(),
-                PoolCalls::DomainSeparator(element) => element.encode(),
-                PoolCalls::DomainTypehash(element) => element.encode(),
-                PoolCalls::DomainVersion(element) => element.encode(),
-                PoolCalls::AddAdmin(element) => element.encode(),
-                PoolCalls::Admins(element) => element.encode(),
-                PoolCalls::Calculate(element) => element.encode(),
-                PoolCalls::DrainTo(element) => element.encode(),
-                PoolCalls::GetChainId(element) => element.encode(),
-                PoolCalls::Max(element) => element.encode(),
-                PoolCalls::NonceUsed(element) => element.encode(),
-                PoolCalls::Owner(element) => element.encode(),
-                PoolCalls::RemoveAdmin(element) => element.encode(),
-                PoolCalls::RenounceOwnership(element) => element.encode(),
-                PoolCalls::Scale(element) => element.encode(),
-                PoolCalls::SetMax(element) => element.encode(),
-                PoolCalls::SetScale(element) => element.encode(),
-                PoolCalls::SetStakingContract(element) => element.encode(),
-                PoolCalls::SetStakingToken(element) => element.encode(),
-                PoolCalls::StakingContract(element) => element.encode(),
-                PoolCalls::StakingToken(element) => element.encode(),
-                PoolCalls::TransferOwnership(element) => element.encode(),
-                PoolCalls::Verify(element) => element.encode(),
-                PoolCalls::Withdraw(element) => element.encode(),
-                PoolCalls::WithdrawAndStake(element) => element.encode(),
+                IPoolCalls::ClaimTypehash(element) => element.encode(),
+                IPoolCalls::DomainChainId(element) => element.encode(),
+                IPoolCalls::DomainName(element) => element.encode(),
+                IPoolCalls::DomainSeparator(element) => element.encode(),
+                IPoolCalls::DomainTypehash(element) => element.encode(),
+                IPoolCalls::DomainVersion(element) => element.encode(),
+                IPoolCalls::AddAdmin(element) => element.encode(),
+                IPoolCalls::Admins(element) => element.encode(),
+                IPoolCalls::Calculate(element) => element.encode(),
+                IPoolCalls::DrainTo(element) => element.encode(),
+                IPoolCalls::GetChainId(element) => element.encode(),
+                IPoolCalls::Max(element) => element.encode(),
+                IPoolCalls::NonceUsed(element) => element.encode(),
+                IPoolCalls::Owner(element) => element.encode(),
+                IPoolCalls::RemoveAdmin(element) => element.encode(),
+                IPoolCalls::RenounceOwnership(element) => element.encode(),
+                IPoolCalls::Scale(element) => element.encode(),
+                IPoolCalls::SetMax(element) => element.encode(),
+                IPoolCalls::SetScale(element) => element.encode(),
+                IPoolCalls::SetStakingContract(element) => element.encode(),
+                IPoolCalls::SetStakingToken(element) => element.encode(),
+                IPoolCalls::StakingContract(element) => element.encode(),
+                IPoolCalls::StakingToken(element) => element.encode(),
+                IPoolCalls::TransferOwnership(element) => element.encode(),
+                IPoolCalls::Verify(element) => element.encode(),
+                IPoolCalls::Withdraw(element) => element.encode(),
+                IPoolCalls::WithdrawAndStake(element) => element.encode(),
             }
         }
     }
-    impl ::std::fmt::Display for PoolCalls {
+    impl ::std::fmt::Display for IPoolCalls {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                PoolCalls::ClaimTypehash(element) => element.fmt(f),
-                PoolCalls::DomainChainId(element) => element.fmt(f),
-                PoolCalls::DomainName(element) => element.fmt(f),
-                PoolCalls::DomainSeparator(element) => element.fmt(f),
-                PoolCalls::DomainTypehash(element) => element.fmt(f),
-                PoolCalls::DomainVersion(element) => element.fmt(f),
-                PoolCalls::AddAdmin(element) => element.fmt(f),
-                PoolCalls::Admins(element) => element.fmt(f),
-                PoolCalls::Calculate(element) => element.fmt(f),
-                PoolCalls::DrainTo(element) => element.fmt(f),
-                PoolCalls::GetChainId(element) => element.fmt(f),
-                PoolCalls::Max(element) => element.fmt(f),
-                PoolCalls::NonceUsed(element) => element.fmt(f),
-                PoolCalls::Owner(element) => element.fmt(f),
-                PoolCalls::RemoveAdmin(element) => element.fmt(f),
-                PoolCalls::RenounceOwnership(element) => element.fmt(f),
-                PoolCalls::Scale(element) => element.fmt(f),
-                PoolCalls::SetMax(element) => element.fmt(f),
-                PoolCalls::SetScale(element) => element.fmt(f),
-                PoolCalls::SetStakingContract(element) => element.fmt(f),
-                PoolCalls::SetStakingToken(element) => element.fmt(f),
-                PoolCalls::StakingContract(element) => element.fmt(f),
-                PoolCalls::StakingToken(element) => element.fmt(f),
-                PoolCalls::TransferOwnership(element) => element.fmt(f),
-                PoolCalls::Verify(element) => element.fmt(f),
-                PoolCalls::Withdraw(element) => element.fmt(f),
-                PoolCalls::WithdrawAndStake(element) => element.fmt(f),
+                IPoolCalls::ClaimTypehash(element) => element.fmt(f),
+                IPoolCalls::DomainChainId(element) => element.fmt(f),
+                IPoolCalls::DomainName(element) => element.fmt(f),
+                IPoolCalls::DomainSeparator(element) => element.fmt(f),
+                IPoolCalls::DomainTypehash(element) => element.fmt(f),
+                IPoolCalls::DomainVersion(element) => element.fmt(f),
+                IPoolCalls::AddAdmin(element) => element.fmt(f),
+                IPoolCalls::Admins(element) => element.fmt(f),
+                IPoolCalls::Calculate(element) => element.fmt(f),
+                IPoolCalls::DrainTo(element) => element.fmt(f),
+                IPoolCalls::GetChainId(element) => element.fmt(f),
+                IPoolCalls::Max(element) => element.fmt(f),
+                IPoolCalls::NonceUsed(element) => element.fmt(f),
+                IPoolCalls::Owner(element) => element.fmt(f),
+                IPoolCalls::RemoveAdmin(element) => element.fmt(f),
+                IPoolCalls::RenounceOwnership(element) => element.fmt(f),
+                IPoolCalls::Scale(element) => element.fmt(f),
+                IPoolCalls::SetMax(element) => element.fmt(f),
+                IPoolCalls::SetScale(element) => element.fmt(f),
+                IPoolCalls::SetStakingContract(element) => element.fmt(f),
+                IPoolCalls::SetStakingToken(element) => element.fmt(f),
+                IPoolCalls::StakingContract(element) => element.fmt(f),
+                IPoolCalls::StakingToken(element) => element.fmt(f),
+                IPoolCalls::TransferOwnership(element) => element.fmt(f),
+                IPoolCalls::Verify(element) => element.fmt(f),
+                IPoolCalls::Withdraw(element) => element.fmt(f),
+                IPoolCalls::WithdrawAndStake(element) => element.fmt(f),
             }
         }
     }
-    impl ::std::convert::From<ClaimTypehashCall> for PoolCalls {
+    impl ::std::convert::From<ClaimTypehashCall> for IPoolCalls {
         fn from(var: ClaimTypehashCall) -> Self {
-            PoolCalls::ClaimTypehash(var)
+            IPoolCalls::ClaimTypehash(var)
         }
     }
-    impl ::std::convert::From<DomainChainIdCall> for PoolCalls {
+    impl ::std::convert::From<DomainChainIdCall> for IPoolCalls {
         fn from(var: DomainChainIdCall) -> Self {
-            PoolCalls::DomainChainId(var)
+            IPoolCalls::DomainChainId(var)
         }
     }
-    impl ::std::convert::From<DomainNameCall> for PoolCalls {
+    impl ::std::convert::From<DomainNameCall> for IPoolCalls {
         fn from(var: DomainNameCall) -> Self {
-            PoolCalls::DomainName(var)
+            IPoolCalls::DomainName(var)
         }
     }
-    impl ::std::convert::From<DomainSeparatorCall> for PoolCalls {
+    impl ::std::convert::From<DomainSeparatorCall> for IPoolCalls {
         fn from(var: DomainSeparatorCall) -> Self {
-            PoolCalls::DomainSeparator(var)
+            IPoolCalls::DomainSeparator(var)
         }
     }
-    impl ::std::convert::From<DomainTypehashCall> for PoolCalls {
+    impl ::std::convert::From<DomainTypehashCall> for IPoolCalls {
         fn from(var: DomainTypehashCall) -> Self {
-            PoolCalls::DomainTypehash(var)
+            IPoolCalls::DomainTypehash(var)
         }
     }
-    impl ::std::convert::From<DomainVersionCall> for PoolCalls {
+    impl ::std::convert::From<DomainVersionCall> for IPoolCalls {
         fn from(var: DomainVersionCall) -> Self {
-            PoolCalls::DomainVersion(var)
+            IPoolCalls::DomainVersion(var)
         }
     }
-    impl ::std::convert::From<AddAdminCall> for PoolCalls {
+    impl ::std::convert::From<AddAdminCall> for IPoolCalls {
         fn from(var: AddAdminCall) -> Self {
-            PoolCalls::AddAdmin(var)
+            IPoolCalls::AddAdmin(var)
         }
     }
-    impl ::std::convert::From<AdminsCall> for PoolCalls {
+    impl ::std::convert::From<AdminsCall> for IPoolCalls {
         fn from(var: AdminsCall) -> Self {
-            PoolCalls::Admins(var)
+            IPoolCalls::Admins(var)
         }
     }
-    impl ::std::convert::From<CalculateCall> for PoolCalls {
+    impl ::std::convert::From<CalculateCall> for IPoolCalls {
         fn from(var: CalculateCall) -> Self {
-            PoolCalls::Calculate(var)
+            IPoolCalls::Calculate(var)
         }
     }
-    impl ::std::convert::From<DrainToCall> for PoolCalls {
+    impl ::std::convert::From<DrainToCall> for IPoolCalls {
         fn from(var: DrainToCall) -> Self {
-            PoolCalls::DrainTo(var)
+            IPoolCalls::DrainTo(var)
         }
     }
-    impl ::std::convert::From<GetChainIdCall> for PoolCalls {
+    impl ::std::convert::From<GetChainIdCall> for IPoolCalls {
         fn from(var: GetChainIdCall) -> Self {
-            PoolCalls::GetChainId(var)
+            IPoolCalls::GetChainId(var)
         }
     }
-    impl ::std::convert::From<MaxCall> for PoolCalls {
+    impl ::std::convert::From<MaxCall> for IPoolCalls {
         fn from(var: MaxCall) -> Self {
-            PoolCalls::Max(var)
+            IPoolCalls::Max(var)
         }
     }
-    impl ::std::convert::From<NonceUsedCall> for PoolCalls {
+    impl ::std::convert::From<NonceUsedCall> for IPoolCalls {
         fn from(var: NonceUsedCall) -> Self {
-            PoolCalls::NonceUsed(var)
+            IPoolCalls::NonceUsed(var)
         }
     }
-    impl ::std::convert::From<OwnerCall> for PoolCalls {
+    impl ::std::convert::From<OwnerCall> for IPoolCalls {
         fn from(var: OwnerCall) -> Self {
-            PoolCalls::Owner(var)
+            IPoolCalls::Owner(var)
         }
     }
-    impl ::std::convert::From<RemoveAdminCall> for PoolCalls {
+    impl ::std::convert::From<RemoveAdminCall> for IPoolCalls {
         fn from(var: RemoveAdminCall) -> Self {
-            PoolCalls::RemoveAdmin(var)
+            IPoolCalls::RemoveAdmin(var)
         }
     }
-    impl ::std::convert::From<RenounceOwnershipCall> for PoolCalls {
+    impl ::std::convert::From<RenounceOwnershipCall> for IPoolCalls {
         fn from(var: RenounceOwnershipCall) -> Self {
-            PoolCalls::RenounceOwnership(var)
+            IPoolCalls::RenounceOwnership(var)
         }
     }
-    impl ::std::convert::From<ScaleCall> for PoolCalls {
+    impl ::std::convert::From<ScaleCall> for IPoolCalls {
         fn from(var: ScaleCall) -> Self {
-            PoolCalls::Scale(var)
+            IPoolCalls::Scale(var)
         }
     }
-    impl ::std::convert::From<SetMaxCall> for PoolCalls {
+    impl ::std::convert::From<SetMaxCall> for IPoolCalls {
         fn from(var: SetMaxCall) -> Self {
-            PoolCalls::SetMax(var)
+            IPoolCalls::SetMax(var)
         }
     }
-    impl ::std::convert::From<SetScaleCall> for PoolCalls {
+    impl ::std::convert::From<SetScaleCall> for IPoolCalls {
         fn from(var: SetScaleCall) -> Self {
-            PoolCalls::SetScale(var)
+            IPoolCalls::SetScale(var)
         }
     }
-    impl ::std::convert::From<SetStakingContractCall> for PoolCalls {
+    impl ::std::convert::From<SetStakingContractCall> for IPoolCalls {
         fn from(var: SetStakingContractCall) -> Self {
-            PoolCalls::SetStakingContract(var)
+            IPoolCalls::SetStakingContract(var)
         }
     }
-    impl ::std::convert::From<SetStakingTokenCall> for PoolCalls {
+    impl ::std::convert::From<SetStakingTokenCall> for IPoolCalls {
         fn from(var: SetStakingTokenCall) -> Self {
-            PoolCalls::SetStakingToken(var)
+            IPoolCalls::SetStakingToken(var)
         }
     }
-    impl ::std::convert::From<StakingContractCall> for PoolCalls {
+    impl ::std::convert::From<StakingContractCall> for IPoolCalls {
         fn from(var: StakingContractCall) -> Self {
-            PoolCalls::StakingContract(var)
+            IPoolCalls::StakingContract(var)
         }
     }
-    impl ::std::convert::From<StakingTokenCall> for PoolCalls {
+    impl ::std::convert::From<StakingTokenCall> for IPoolCalls {
         fn from(var: StakingTokenCall) -> Self {
-            PoolCalls::StakingToken(var)
+            IPoolCalls::StakingToken(var)
         }
     }
-    impl ::std::convert::From<TransferOwnershipCall> for PoolCalls {
+    impl ::std::convert::From<TransferOwnershipCall> for IPoolCalls {
         fn from(var: TransferOwnershipCall) -> Self {
-            PoolCalls::TransferOwnership(var)
+            IPoolCalls::TransferOwnership(var)
         }
     }
-    impl ::std::convert::From<VerifyCall> for PoolCalls {
+    impl ::std::convert::From<VerifyCall> for IPoolCalls {
         fn from(var: VerifyCall) -> Self {
-            PoolCalls::Verify(var)
+            IPoolCalls::Verify(var)
         }
     }
-    impl ::std::convert::From<WithdrawCall> for PoolCalls {
+    impl ::std::convert::From<WithdrawCall> for IPoolCalls {
         fn from(var: WithdrawCall) -> Self {
-            PoolCalls::Withdraw(var)
+            IPoolCalls::Withdraw(var)
         }
     }
-    impl ::std::convert::From<WithdrawAndStakeCall> for PoolCalls {
+    impl ::std::convert::From<WithdrawAndStakeCall> for IPoolCalls {
         fn from(var: WithdrawAndStakeCall) -> Self {
-            PoolCalls::WithdrawAndStake(var)
+            IPoolCalls::WithdrawAndStake(var)
         }
     }
     #[doc = "Container type for all return fields from the `CLAIM_TYPEHASH` function with signature `CLAIM_TYPEHASH()` and selector `[107, 5, 9, 177]`"]

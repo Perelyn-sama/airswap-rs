@@ -1,6 +1,6 @@
-pub use wrapper::*;
+pub use i_wrapper::*;
 #[allow(clippy::too_many_arguments, non_camel_case_types)]
-pub mod wrapper {
+pub mod i_wrapper {
     #![allow(clippy::enum_variant_names)]
     #![allow(dead_code)]
     #![allow(clippy::type_complexity)]
@@ -14,34 +14,34 @@ pub mod wrapper {
         types::*,
     };
     use ethers::providers::Middleware;
-    #[doc = "Wrapper was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
+    #[doc = "IWrapper was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
     use std::sync::Arc;
     # [rustfmt :: skip] const __ABI : & str = "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_swapContract\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_wethContract\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"senderWallet\",\"type\":\"address\"}],\"name\":\"WrappedSwapFor\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_swapContract\",\"type\":\"address\"}],\"name\":\"setSwapContract\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"signerWallet\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"signerToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"signerAmount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"senderToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"senderAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"swap\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"signerWallet\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"signerToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"signerAmount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"senderToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"senderAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"swapAnySender\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"swapContract\",\"outputs\":[{\"internalType\":\"contract ISwapERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"wethContract\",\"outputs\":[{\"internalType\":\"contract IWETH\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]" ;
     #[doc = r" The parsed JSON-ABI of the contract."]
-    pub static WRAPPER_ABI: ethers::contract::Lazy<ethers::core::abi::Abi> =
+    pub static IWRAPPER_ABI: ethers::contract::Lazy<ethers::core::abi::Abi> =
         ethers::contract::Lazy::new(|| {
             ethers::core::utils::__serde_json::from_str(__ABI).expect("invalid abi")
         });
-    pub struct Wrapper<M>(ethers::contract::Contract<M>);
-    impl<M> Clone for Wrapper<M> {
+    pub struct IWrapper<M>(ethers::contract::Contract<M>);
+    impl<M> Clone for IWrapper<M> {
         fn clone(&self) -> Self {
-            Wrapper(self.0.clone())
+            IWrapper(self.0.clone())
         }
     }
-    impl<M> std::ops::Deref for Wrapper<M> {
+    impl<M> std::ops::Deref for IWrapper<M> {
         type Target = ethers::contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
             &self.0
         }
     }
-    impl<M> std::fmt::Debug for Wrapper<M> {
+    impl<M> std::fmt::Debug for IWrapper<M> {
         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-            f.debug_tuple(stringify!(Wrapper))
+            f.debug_tuple(stringify!(IWrapper))
                 .field(&self.address())
                 .finish()
         }
     }
-    impl<M: ethers::providers::Middleware> Wrapper<M> {
+    impl<M: ethers::providers::Middleware> IWrapper<M> {
         #[doc = r" Creates a new contract instance with the specified `ethers`"]
         #[doc = r" client at the given `Address`. The contract derefs to a `ethers::Contract`"]
         #[doc = r" object"]
@@ -49,7 +49,7 @@ pub mod wrapper {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            ethers::contract::Contract::new(address.into(), WRAPPER_ABI.clone(), client).into()
+            ethers::contract::Contract::new(address.into(), IWRAPPER_ABI.clone(), client).into()
         }
         #[doc = "Calls the contract's `owner` (0x8da5cb5b) function"]
         pub fn owner(
@@ -176,11 +176,11 @@ pub mod wrapper {
             self.0.event()
         }
         #[doc = r" Returns an [`Event`](#ethers_contract::builders::Event) builder for all events of this contract"]
-        pub fn events(&self) -> ethers::contract::builders::Event<M, WrapperEvents> {
+        pub fn events(&self) -> ethers::contract::builders::Event<M, IWrapperEvents> {
             self.0.event_with_filter(Default::default())
         }
     }
-    impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>> for Wrapper<M> {
+    impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>> for IWrapper<M> {
         fn from(contract: ethers::contract::Contract<M>) -> Self {
             Self(contract)
         }
@@ -219,11 +219,11 @@ pub mod wrapper {
         pub sender_wallet: ethers::core::types::Address,
     }
     #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
-    pub enum WrapperEvents {
+    pub enum IWrapperEvents {
         OwnershipTransferredFilter(OwnershipTransferredFilter),
         WrappedSwapForFilter(WrappedSwapForFilter),
     }
-    impl ethers::contract::EthLogDecode for WrapperEvents {
+    impl ethers::contract::EthLogDecode for IWrapperEvents {
         fn decode_log(
             log: &ethers::core::abi::RawLog,
         ) -> ::std::result::Result<Self, ethers::core::abi::Error>
@@ -231,19 +231,19 @@ pub mod wrapper {
             Self: Sized,
         {
             if let Ok(decoded) = OwnershipTransferredFilter::decode_log(log) {
-                return Ok(WrapperEvents::OwnershipTransferredFilter(decoded));
+                return Ok(IWrapperEvents::OwnershipTransferredFilter(decoded));
             }
             if let Ok(decoded) = WrappedSwapForFilter::decode_log(log) {
-                return Ok(WrapperEvents::WrappedSwapForFilter(decoded));
+                return Ok(IWrapperEvents::WrappedSwapForFilter(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData)
         }
     }
-    impl ::std::fmt::Display for WrapperEvents {
+    impl ::std::fmt::Display for IWrapperEvents {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                WrapperEvents::OwnershipTransferredFilter(element) => element.fmt(f),
-                WrapperEvents::WrappedSwapForFilter(element) => element.fmt(f),
+                IWrapperEvents::OwnershipTransferredFilter(element) => element.fmt(f),
+                IWrapperEvents::WrappedSwapForFilter(element) => element.fmt(f),
             }
         }
     }
@@ -376,7 +376,7 @@ pub mod wrapper {
     #[ethcall(name = "wethContract", abi = "wethContract()")]
     pub struct WethContractCall;
     #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
-    pub enum WrapperCalls {
+    pub enum IWrapperCalls {
         Owner(OwnerCall),
         RenounceOwnership(RenounceOwnershipCall),
         SetSwapContract(SetSwapContractCall),
@@ -386,116 +386,116 @@ pub mod wrapper {
         TransferOwnership(TransferOwnershipCall),
         WethContract(WethContractCall),
     }
-    impl ethers::core::abi::AbiDecode for WrapperCalls {
+    impl ethers::core::abi::AbiDecode for IWrapperCalls {
         fn decode(
             data: impl AsRef<[u8]>,
         ) -> ::std::result::Result<Self, ethers::core::abi::AbiError> {
             if let Ok(decoded) = <OwnerCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(WrapperCalls::Owner(decoded));
+                return Ok(IWrapperCalls::Owner(decoded));
             }
             if let Ok(decoded) =
                 <RenounceOwnershipCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(WrapperCalls::RenounceOwnership(decoded));
+                return Ok(IWrapperCalls::RenounceOwnership(decoded));
             }
             if let Ok(decoded) =
                 <SetSwapContractCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(WrapperCalls::SetSwapContract(decoded));
+                return Ok(IWrapperCalls::SetSwapContract(decoded));
             }
             if let Ok(decoded) = <SwapCall as ethers::core::abi::AbiDecode>::decode(data.as_ref()) {
-                return Ok(WrapperCalls::Swap(decoded));
+                return Ok(IWrapperCalls::Swap(decoded));
             }
             if let Ok(decoded) =
                 <SwapAnySenderCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(WrapperCalls::SwapAnySender(decoded));
+                return Ok(IWrapperCalls::SwapAnySender(decoded));
             }
             if let Ok(decoded) =
                 <SwapContractCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(WrapperCalls::SwapContract(decoded));
+                return Ok(IWrapperCalls::SwapContract(decoded));
             }
             if let Ok(decoded) =
                 <TransferOwnershipCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(WrapperCalls::TransferOwnership(decoded));
+                return Ok(IWrapperCalls::TransferOwnership(decoded));
             }
             if let Ok(decoded) =
                 <WethContractCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(WrapperCalls::WethContract(decoded));
+                return Ok(IWrapperCalls::WethContract(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData.into())
         }
     }
-    impl ethers::core::abi::AbiEncode for WrapperCalls {
+    impl ethers::core::abi::AbiEncode for IWrapperCalls {
         fn encode(self) -> Vec<u8> {
             match self {
-                WrapperCalls::Owner(element) => element.encode(),
-                WrapperCalls::RenounceOwnership(element) => element.encode(),
-                WrapperCalls::SetSwapContract(element) => element.encode(),
-                WrapperCalls::Swap(element) => element.encode(),
-                WrapperCalls::SwapAnySender(element) => element.encode(),
-                WrapperCalls::SwapContract(element) => element.encode(),
-                WrapperCalls::TransferOwnership(element) => element.encode(),
-                WrapperCalls::WethContract(element) => element.encode(),
+                IWrapperCalls::Owner(element) => element.encode(),
+                IWrapperCalls::RenounceOwnership(element) => element.encode(),
+                IWrapperCalls::SetSwapContract(element) => element.encode(),
+                IWrapperCalls::Swap(element) => element.encode(),
+                IWrapperCalls::SwapAnySender(element) => element.encode(),
+                IWrapperCalls::SwapContract(element) => element.encode(),
+                IWrapperCalls::TransferOwnership(element) => element.encode(),
+                IWrapperCalls::WethContract(element) => element.encode(),
             }
         }
     }
-    impl ::std::fmt::Display for WrapperCalls {
+    impl ::std::fmt::Display for IWrapperCalls {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                WrapperCalls::Owner(element) => element.fmt(f),
-                WrapperCalls::RenounceOwnership(element) => element.fmt(f),
-                WrapperCalls::SetSwapContract(element) => element.fmt(f),
-                WrapperCalls::Swap(element) => element.fmt(f),
-                WrapperCalls::SwapAnySender(element) => element.fmt(f),
-                WrapperCalls::SwapContract(element) => element.fmt(f),
-                WrapperCalls::TransferOwnership(element) => element.fmt(f),
-                WrapperCalls::WethContract(element) => element.fmt(f),
+                IWrapperCalls::Owner(element) => element.fmt(f),
+                IWrapperCalls::RenounceOwnership(element) => element.fmt(f),
+                IWrapperCalls::SetSwapContract(element) => element.fmt(f),
+                IWrapperCalls::Swap(element) => element.fmt(f),
+                IWrapperCalls::SwapAnySender(element) => element.fmt(f),
+                IWrapperCalls::SwapContract(element) => element.fmt(f),
+                IWrapperCalls::TransferOwnership(element) => element.fmt(f),
+                IWrapperCalls::WethContract(element) => element.fmt(f),
             }
         }
     }
-    impl ::std::convert::From<OwnerCall> for WrapperCalls {
+    impl ::std::convert::From<OwnerCall> for IWrapperCalls {
         fn from(var: OwnerCall) -> Self {
-            WrapperCalls::Owner(var)
+            IWrapperCalls::Owner(var)
         }
     }
-    impl ::std::convert::From<RenounceOwnershipCall> for WrapperCalls {
+    impl ::std::convert::From<RenounceOwnershipCall> for IWrapperCalls {
         fn from(var: RenounceOwnershipCall) -> Self {
-            WrapperCalls::RenounceOwnership(var)
+            IWrapperCalls::RenounceOwnership(var)
         }
     }
-    impl ::std::convert::From<SetSwapContractCall> for WrapperCalls {
+    impl ::std::convert::From<SetSwapContractCall> for IWrapperCalls {
         fn from(var: SetSwapContractCall) -> Self {
-            WrapperCalls::SetSwapContract(var)
+            IWrapperCalls::SetSwapContract(var)
         }
     }
-    impl ::std::convert::From<SwapCall> for WrapperCalls {
+    impl ::std::convert::From<SwapCall> for IWrapperCalls {
         fn from(var: SwapCall) -> Self {
-            WrapperCalls::Swap(var)
+            IWrapperCalls::Swap(var)
         }
     }
-    impl ::std::convert::From<SwapAnySenderCall> for WrapperCalls {
+    impl ::std::convert::From<SwapAnySenderCall> for IWrapperCalls {
         fn from(var: SwapAnySenderCall) -> Self {
-            WrapperCalls::SwapAnySender(var)
+            IWrapperCalls::SwapAnySender(var)
         }
     }
-    impl ::std::convert::From<SwapContractCall> for WrapperCalls {
+    impl ::std::convert::From<SwapContractCall> for IWrapperCalls {
         fn from(var: SwapContractCall) -> Self {
-            WrapperCalls::SwapContract(var)
+            IWrapperCalls::SwapContract(var)
         }
     }
-    impl ::std::convert::From<TransferOwnershipCall> for WrapperCalls {
+    impl ::std::convert::From<TransferOwnershipCall> for IWrapperCalls {
         fn from(var: TransferOwnershipCall) -> Self {
-            WrapperCalls::TransferOwnership(var)
+            IWrapperCalls::TransferOwnership(var)
         }
     }
-    impl ::std::convert::From<WethContractCall> for WrapperCalls {
+    impl ::std::convert::From<WethContractCall> for IWrapperCalls {
         fn from(var: WethContractCall) -> Self {
-            WrapperCalls::WethContract(var)
+            IWrapperCalls::WethContract(var)
         }
     }
     #[doc = "Container type for all return fields from the `owner` function with signature `owner()` and selector `[141, 165, 203, 91]`"]

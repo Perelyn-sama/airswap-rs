@@ -1,6 +1,6 @@
-pub use registry::*;
+pub use i_registry::*;
 #[allow(clippy::too_many_arguments, non_camel_case_types)]
-pub mod registry {
+pub mod i_registry {
     #![allow(clippy::enum_variant_names)]
     #![allow(dead_code)]
     #![allow(clippy::type_complexity)]
@@ -14,34 +14,34 @@ pub mod registry {
         types::*,
     };
     use ethers::providers::Middleware;
-    #[doc = "Registry was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
+    #[doc = "IRegistry was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
     use std::sync::Arc;
     # [rustfmt :: skip] const __ABI : & str = "[{\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"_stakingToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_obligationCost\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_tokenCost\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"tokens\",\"type\":\"address[]\"}],\"name\":\"AddTokens\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"FullUnstake\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"InitialStake\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address[]\",\"name\":\"tokens\",\"type\":\"address[]\"}],\"name\":\"RemoveTokens\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"url\",\"type\":\"string\"}],\"name\":\"SetURL\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"tokens\",\"type\":\"address[]\"}],\"name\":\"addTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"getStakersForToken\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"stakers\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"}],\"name\":\"getSupportedTokens\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"tokenList\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"stakers\",\"type\":\"address[]\"}],\"name\":\"getURLsForStakers\",\"outputs\":[{\"internalType\":\"string[]\",\"name\":\"urls\",\"type\":\"string[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"getURLsForToken\",\"outputs\":[{\"internalType\":\"string[]\",\"name\":\"urls\",\"type\":\"string[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"obligationCost\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"removeAllTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"tokens\",\"type\":\"address[]\"}],\"name\":\"removeTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_url\",\"type\":\"string\"}],\"name\":\"setURL\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"stakerURLs\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stakingToken\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"supportsToken\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"tokenCost\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]" ;
     #[doc = r" The parsed JSON-ABI of the contract."]
-    pub static REGISTRY_ABI: ethers::contract::Lazy<ethers::core::abi::Abi> =
+    pub static IREGISTRY_ABI: ethers::contract::Lazy<ethers::core::abi::Abi> =
         ethers::contract::Lazy::new(|| {
             ethers::core::utils::__serde_json::from_str(__ABI).expect("invalid abi")
         });
-    pub struct Registry<M>(ethers::contract::Contract<M>);
-    impl<M> Clone for Registry<M> {
+    pub struct IRegistry<M>(ethers::contract::Contract<M>);
+    impl<M> Clone for IRegistry<M> {
         fn clone(&self) -> Self {
-            Registry(self.0.clone())
+            IRegistry(self.0.clone())
         }
     }
-    impl<M> std::ops::Deref for Registry<M> {
+    impl<M> std::ops::Deref for IRegistry<M> {
         type Target = ethers::contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
             &self.0
         }
     }
-    impl<M> std::fmt::Debug for Registry<M> {
+    impl<M> std::fmt::Debug for IRegistry<M> {
         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-            f.debug_tuple(stringify!(Registry))
+            f.debug_tuple(stringify!(IRegistry))
                 .field(&self.address())
                 .finish()
         }
     }
-    impl<M: ethers::providers::Middleware> Registry<M> {
+    impl<M: ethers::providers::Middleware> IRegistry<M> {
         #[doc = r" Creates a new contract instance with the specified `ethers`"]
         #[doc = r" client at the given `Address`. The contract derefs to a `ethers::Contract`"]
         #[doc = r" object"]
@@ -49,7 +49,7 @@ pub mod registry {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            ethers::contract::Contract::new(address.into(), REGISTRY_ABI.clone(), client).into()
+            ethers::contract::Contract::new(address.into(), IREGISTRY_ABI.clone(), client).into()
         }
         #[doc = "Calls the contract's `addTokens` (0x4ae05c7d) function"]
         pub fn add_tokens(
@@ -202,11 +202,11 @@ pub mod registry {
             self.0.event()
         }
         #[doc = r" Returns an [`Event`](#ethers_contract::builders::Event) builder for all events of this contract"]
-        pub fn events(&self) -> ethers::contract::builders::Event<M, RegistryEvents> {
+        pub fn events(&self) -> ethers::contract::builders::Event<M, IRegistryEvents> {
             self.0.event_with_filter(Default::default())
         }
     }
-    impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>> for Registry<M> {
+    impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>> for IRegistry<M> {
         fn from(contract: ethers::contract::Contract<M>) -> Self {
             Self(contract)
         }
@@ -285,14 +285,14 @@ pub mod registry {
         pub url: String,
     }
     #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
-    pub enum RegistryEvents {
+    pub enum IRegistryEvents {
         AddTokensFilter(AddTokensFilter),
         FullUnstakeFilter(FullUnstakeFilter),
         InitialStakeFilter(InitialStakeFilter),
         RemoveTokensFilter(RemoveTokensFilter),
         SetURLFilter(SetURLFilter),
     }
-    impl ethers::contract::EthLogDecode for RegistryEvents {
+    impl ethers::contract::EthLogDecode for IRegistryEvents {
         fn decode_log(
             log: &ethers::core::abi::RawLog,
         ) -> ::std::result::Result<Self, ethers::core::abi::Error>
@@ -300,31 +300,31 @@ pub mod registry {
             Self: Sized,
         {
             if let Ok(decoded) = AddTokensFilter::decode_log(log) {
-                return Ok(RegistryEvents::AddTokensFilter(decoded));
+                return Ok(IRegistryEvents::AddTokensFilter(decoded));
             }
             if let Ok(decoded) = FullUnstakeFilter::decode_log(log) {
-                return Ok(RegistryEvents::FullUnstakeFilter(decoded));
+                return Ok(IRegistryEvents::FullUnstakeFilter(decoded));
             }
             if let Ok(decoded) = InitialStakeFilter::decode_log(log) {
-                return Ok(RegistryEvents::InitialStakeFilter(decoded));
+                return Ok(IRegistryEvents::InitialStakeFilter(decoded));
             }
             if let Ok(decoded) = RemoveTokensFilter::decode_log(log) {
-                return Ok(RegistryEvents::RemoveTokensFilter(decoded));
+                return Ok(IRegistryEvents::RemoveTokensFilter(decoded));
             }
             if let Ok(decoded) = SetURLFilter::decode_log(log) {
-                return Ok(RegistryEvents::SetURLFilter(decoded));
+                return Ok(IRegistryEvents::SetURLFilter(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData)
         }
     }
-    impl ::std::fmt::Display for RegistryEvents {
+    impl ::std::fmt::Display for IRegistryEvents {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                RegistryEvents::AddTokensFilter(element) => element.fmt(f),
-                RegistryEvents::FullUnstakeFilter(element) => element.fmt(f),
-                RegistryEvents::InitialStakeFilter(element) => element.fmt(f),
-                RegistryEvents::RemoveTokensFilter(element) => element.fmt(f),
-                RegistryEvents::SetURLFilter(element) => element.fmt(f),
+                IRegistryEvents::AddTokensFilter(element) => element.fmt(f),
+                IRegistryEvents::FullUnstakeFilter(element) => element.fmt(f),
+                IRegistryEvents::InitialStakeFilter(element) => element.fmt(f),
+                IRegistryEvents::RemoveTokensFilter(element) => element.fmt(f),
+                IRegistryEvents::SetURLFilter(element) => element.fmt(f),
             }
         }
     }
@@ -516,7 +516,7 @@ pub mod registry {
     #[ethcall(name = "tokenCost", abi = "tokenCost()")]
     pub struct TokenCostCall;
     #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
-    pub enum RegistryCalls {
+    pub enum IRegistryCalls {
         AddTokens(AddTokensCall),
         BalanceOf(BalanceOfCall),
         GetStakersForToken(GetStakersForTokenCall),
@@ -532,190 +532,190 @@ pub mod registry {
         SupportsToken(SupportsTokenCall),
         TokenCost(TokenCostCall),
     }
-    impl ethers::core::abi::AbiDecode for RegistryCalls {
+    impl ethers::core::abi::AbiDecode for IRegistryCalls {
         fn decode(
             data: impl AsRef<[u8]>,
         ) -> ::std::result::Result<Self, ethers::core::abi::AbiError> {
             if let Ok(decoded) =
                 <AddTokensCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(RegistryCalls::AddTokens(decoded));
+                return Ok(IRegistryCalls::AddTokens(decoded));
             }
             if let Ok(decoded) =
                 <BalanceOfCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(RegistryCalls::BalanceOf(decoded));
+                return Ok(IRegistryCalls::BalanceOf(decoded));
             }
             if let Ok(decoded) =
                 <GetStakersForTokenCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(RegistryCalls::GetStakersForToken(decoded));
+                return Ok(IRegistryCalls::GetStakersForToken(decoded));
             }
             if let Ok(decoded) =
                 <GetSupportedTokensCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(RegistryCalls::GetSupportedTokens(decoded));
+                return Ok(IRegistryCalls::GetSupportedTokens(decoded));
             }
             if let Ok(decoded) =
                 <GetURLsForStakersCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(RegistryCalls::GetURLsForStakers(decoded));
+                return Ok(IRegistryCalls::GetURLsForStakers(decoded));
             }
             if let Ok(decoded) =
                 <GetURLsForTokenCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(RegistryCalls::GetURLsForToken(decoded));
+                return Ok(IRegistryCalls::GetURLsForToken(decoded));
             }
             if let Ok(decoded) =
                 <ObligationCostCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(RegistryCalls::ObligationCost(decoded));
+                return Ok(IRegistryCalls::ObligationCost(decoded));
             }
             if let Ok(decoded) =
                 <RemoveAllTokensCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(RegistryCalls::RemoveAllTokens(decoded));
+                return Ok(IRegistryCalls::RemoveAllTokens(decoded));
             }
             if let Ok(decoded) =
                 <RemoveTokensCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(RegistryCalls::RemoveTokens(decoded));
+                return Ok(IRegistryCalls::RemoveTokens(decoded));
             }
             if let Ok(decoded) = <SetURLCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(RegistryCalls::SetURL(decoded));
+                return Ok(IRegistryCalls::SetURL(decoded));
             }
             if let Ok(decoded) =
                 <StakerURLsCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(RegistryCalls::StakerURLs(decoded));
+                return Ok(IRegistryCalls::StakerURLs(decoded));
             }
             if let Ok(decoded) =
                 <StakingTokenCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(RegistryCalls::StakingToken(decoded));
+                return Ok(IRegistryCalls::StakingToken(decoded));
             }
             if let Ok(decoded) =
                 <SupportsTokenCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(RegistryCalls::SupportsToken(decoded));
+                return Ok(IRegistryCalls::SupportsToken(decoded));
             }
             if let Ok(decoded) =
                 <TokenCostCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(RegistryCalls::TokenCost(decoded));
+                return Ok(IRegistryCalls::TokenCost(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData.into())
         }
     }
-    impl ethers::core::abi::AbiEncode for RegistryCalls {
+    impl ethers::core::abi::AbiEncode for IRegistryCalls {
         fn encode(self) -> Vec<u8> {
             match self {
-                RegistryCalls::AddTokens(element) => element.encode(),
-                RegistryCalls::BalanceOf(element) => element.encode(),
-                RegistryCalls::GetStakersForToken(element) => element.encode(),
-                RegistryCalls::GetSupportedTokens(element) => element.encode(),
-                RegistryCalls::GetURLsForStakers(element) => element.encode(),
-                RegistryCalls::GetURLsForToken(element) => element.encode(),
-                RegistryCalls::ObligationCost(element) => element.encode(),
-                RegistryCalls::RemoveAllTokens(element) => element.encode(),
-                RegistryCalls::RemoveTokens(element) => element.encode(),
-                RegistryCalls::SetURL(element) => element.encode(),
-                RegistryCalls::StakerURLs(element) => element.encode(),
-                RegistryCalls::StakingToken(element) => element.encode(),
-                RegistryCalls::SupportsToken(element) => element.encode(),
-                RegistryCalls::TokenCost(element) => element.encode(),
+                IRegistryCalls::AddTokens(element) => element.encode(),
+                IRegistryCalls::BalanceOf(element) => element.encode(),
+                IRegistryCalls::GetStakersForToken(element) => element.encode(),
+                IRegistryCalls::GetSupportedTokens(element) => element.encode(),
+                IRegistryCalls::GetURLsForStakers(element) => element.encode(),
+                IRegistryCalls::GetURLsForToken(element) => element.encode(),
+                IRegistryCalls::ObligationCost(element) => element.encode(),
+                IRegistryCalls::RemoveAllTokens(element) => element.encode(),
+                IRegistryCalls::RemoveTokens(element) => element.encode(),
+                IRegistryCalls::SetURL(element) => element.encode(),
+                IRegistryCalls::StakerURLs(element) => element.encode(),
+                IRegistryCalls::StakingToken(element) => element.encode(),
+                IRegistryCalls::SupportsToken(element) => element.encode(),
+                IRegistryCalls::TokenCost(element) => element.encode(),
             }
         }
     }
-    impl ::std::fmt::Display for RegistryCalls {
+    impl ::std::fmt::Display for IRegistryCalls {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                RegistryCalls::AddTokens(element) => element.fmt(f),
-                RegistryCalls::BalanceOf(element) => element.fmt(f),
-                RegistryCalls::GetStakersForToken(element) => element.fmt(f),
-                RegistryCalls::GetSupportedTokens(element) => element.fmt(f),
-                RegistryCalls::GetURLsForStakers(element) => element.fmt(f),
-                RegistryCalls::GetURLsForToken(element) => element.fmt(f),
-                RegistryCalls::ObligationCost(element) => element.fmt(f),
-                RegistryCalls::RemoveAllTokens(element) => element.fmt(f),
-                RegistryCalls::RemoveTokens(element) => element.fmt(f),
-                RegistryCalls::SetURL(element) => element.fmt(f),
-                RegistryCalls::StakerURLs(element) => element.fmt(f),
-                RegistryCalls::StakingToken(element) => element.fmt(f),
-                RegistryCalls::SupportsToken(element) => element.fmt(f),
-                RegistryCalls::TokenCost(element) => element.fmt(f),
+                IRegistryCalls::AddTokens(element) => element.fmt(f),
+                IRegistryCalls::BalanceOf(element) => element.fmt(f),
+                IRegistryCalls::GetStakersForToken(element) => element.fmt(f),
+                IRegistryCalls::GetSupportedTokens(element) => element.fmt(f),
+                IRegistryCalls::GetURLsForStakers(element) => element.fmt(f),
+                IRegistryCalls::GetURLsForToken(element) => element.fmt(f),
+                IRegistryCalls::ObligationCost(element) => element.fmt(f),
+                IRegistryCalls::RemoveAllTokens(element) => element.fmt(f),
+                IRegistryCalls::RemoveTokens(element) => element.fmt(f),
+                IRegistryCalls::SetURL(element) => element.fmt(f),
+                IRegistryCalls::StakerURLs(element) => element.fmt(f),
+                IRegistryCalls::StakingToken(element) => element.fmt(f),
+                IRegistryCalls::SupportsToken(element) => element.fmt(f),
+                IRegistryCalls::TokenCost(element) => element.fmt(f),
             }
         }
     }
-    impl ::std::convert::From<AddTokensCall> for RegistryCalls {
+    impl ::std::convert::From<AddTokensCall> for IRegistryCalls {
         fn from(var: AddTokensCall) -> Self {
-            RegistryCalls::AddTokens(var)
+            IRegistryCalls::AddTokens(var)
         }
     }
-    impl ::std::convert::From<BalanceOfCall> for RegistryCalls {
+    impl ::std::convert::From<BalanceOfCall> for IRegistryCalls {
         fn from(var: BalanceOfCall) -> Self {
-            RegistryCalls::BalanceOf(var)
+            IRegistryCalls::BalanceOf(var)
         }
     }
-    impl ::std::convert::From<GetStakersForTokenCall> for RegistryCalls {
+    impl ::std::convert::From<GetStakersForTokenCall> for IRegistryCalls {
         fn from(var: GetStakersForTokenCall) -> Self {
-            RegistryCalls::GetStakersForToken(var)
+            IRegistryCalls::GetStakersForToken(var)
         }
     }
-    impl ::std::convert::From<GetSupportedTokensCall> for RegistryCalls {
+    impl ::std::convert::From<GetSupportedTokensCall> for IRegistryCalls {
         fn from(var: GetSupportedTokensCall) -> Self {
-            RegistryCalls::GetSupportedTokens(var)
+            IRegistryCalls::GetSupportedTokens(var)
         }
     }
-    impl ::std::convert::From<GetURLsForStakersCall> for RegistryCalls {
+    impl ::std::convert::From<GetURLsForStakersCall> for IRegistryCalls {
         fn from(var: GetURLsForStakersCall) -> Self {
-            RegistryCalls::GetURLsForStakers(var)
+            IRegistryCalls::GetURLsForStakers(var)
         }
     }
-    impl ::std::convert::From<GetURLsForTokenCall> for RegistryCalls {
+    impl ::std::convert::From<GetURLsForTokenCall> for IRegistryCalls {
         fn from(var: GetURLsForTokenCall) -> Self {
-            RegistryCalls::GetURLsForToken(var)
+            IRegistryCalls::GetURLsForToken(var)
         }
     }
-    impl ::std::convert::From<ObligationCostCall> for RegistryCalls {
+    impl ::std::convert::From<ObligationCostCall> for IRegistryCalls {
         fn from(var: ObligationCostCall) -> Self {
-            RegistryCalls::ObligationCost(var)
+            IRegistryCalls::ObligationCost(var)
         }
     }
-    impl ::std::convert::From<RemoveAllTokensCall> for RegistryCalls {
+    impl ::std::convert::From<RemoveAllTokensCall> for IRegistryCalls {
         fn from(var: RemoveAllTokensCall) -> Self {
-            RegistryCalls::RemoveAllTokens(var)
+            IRegistryCalls::RemoveAllTokens(var)
         }
     }
-    impl ::std::convert::From<RemoveTokensCall> for RegistryCalls {
+    impl ::std::convert::From<RemoveTokensCall> for IRegistryCalls {
         fn from(var: RemoveTokensCall) -> Self {
-            RegistryCalls::RemoveTokens(var)
+            IRegistryCalls::RemoveTokens(var)
         }
     }
-    impl ::std::convert::From<SetURLCall> for RegistryCalls {
+    impl ::std::convert::From<SetURLCall> for IRegistryCalls {
         fn from(var: SetURLCall) -> Self {
-            RegistryCalls::SetURL(var)
+            IRegistryCalls::SetURL(var)
         }
     }
-    impl ::std::convert::From<StakerURLsCall> for RegistryCalls {
+    impl ::std::convert::From<StakerURLsCall> for IRegistryCalls {
         fn from(var: StakerURLsCall) -> Self {
-            RegistryCalls::StakerURLs(var)
+            IRegistryCalls::StakerURLs(var)
         }
     }
-    impl ::std::convert::From<StakingTokenCall> for RegistryCalls {
+    impl ::std::convert::From<StakingTokenCall> for IRegistryCalls {
         fn from(var: StakingTokenCall) -> Self {
-            RegistryCalls::StakingToken(var)
+            IRegistryCalls::StakingToken(var)
         }
     }
-    impl ::std::convert::From<SupportsTokenCall> for RegistryCalls {
+    impl ::std::convert::From<SupportsTokenCall> for IRegistryCalls {
         fn from(var: SupportsTokenCall) -> Self {
-            RegistryCalls::SupportsToken(var)
+            IRegistryCalls::SupportsToken(var)
         }
     }
-    impl ::std::convert::From<TokenCostCall> for RegistryCalls {
+    impl ::std::convert::From<TokenCostCall> for IRegistryCalls {
         fn from(var: TokenCostCall) -> Self {
-            RegistryCalls::TokenCost(var)
+            IRegistryCalls::TokenCost(var)
         }
     }
     #[doc = "Container type for all return fields from the `balanceOf` function with signature `balanceOf(address)` and selector `[112, 160, 130, 49]`"]

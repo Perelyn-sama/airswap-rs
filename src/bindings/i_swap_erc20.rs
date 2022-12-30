@@ -1,6 +1,6 @@
-pub use swap_erc20::*;
+pub use i_swap_erc20::*;
 #[allow(clippy::too_many_arguments, non_camel_case_types)]
-pub mod swap_erc20 {
+pub mod i_swap_erc20 {
     #![allow(clippy::enum_variant_names)]
     #![allow(dead_code)]
     #![allow(clippy::type_complexity)]
@@ -14,34 +14,34 @@ pub mod swap_erc20 {
         types::*,
     };
     use ethers::providers::Middleware;
-    #[doc = "SwapERC20 was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
+    #[doc = "ISwapERC20 was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
     use std::sync::Arc;
     # [rustfmt :: skip] const __ABI : & str = "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_protocolFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_protocolFeeLight\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_protocolFeeWallet\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_rebateScale\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_rebateMax\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_staking\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"signerWallet\",\"type\":\"address\"}],\"name\":\"Authorize\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"signerWallet\",\"type\":\"address\"}],\"name\":\"Cancel\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"signerWallet\",\"type\":\"address\"}],\"name\":\"Revoke\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"protocolFee\",\"type\":\"uint256\"}],\"name\":\"SetProtocolFee\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"protocolFeeLight\",\"type\":\"uint256\"}],\"name\":\"SetProtocolFeeLight\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"feeWallet\",\"type\":\"address\"}],\"name\":\"SetProtocolFeeWallet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"rebateMax\",\"type\":\"uint256\"}],\"name\":\"SetRebateMax\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"rebateScale\",\"type\":\"uint256\"}],\"name\":\"SetRebateScale\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"staking\",\"type\":\"address\"}],\"name\":\"SetStaking\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"signerWallet\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"signerToken\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"signerAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"protocolFee\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"senderWallet\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"senderToken\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"senderAmount\",\"type\":\"uint256\"}],\"name\":\"Swap\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"DOMAIN_CHAIN_ID\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DOMAIN_NAME\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DOMAIN_SEPARATOR\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DOMAIN_TYPEHASH\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DOMAIN_VERSION\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"FEE_DIVISOR\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ORDER_TYPEHASH\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"}],\"name\":\"authorize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"authorized\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"stakingBalance\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"feeAmount\",\"type\":\"uint256\"}],\"name\":\"calculateDiscount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"wallet\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"calculateProtocolFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"nonces\",\"type\":\"uint256[]\"}],\"name\":\"cancel\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"senderWallet\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"signerWallet\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"signerToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"signerAmount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"senderToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"senderAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"check\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"bytes32[]\",\"name\":\"\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"signer\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"name\":\"nonceUsed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"protocolFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"protocolFeeLight\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"protocolFeeWallet\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rebateMax\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rebateScale\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"revoke\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_protocolFee\",\"type\":\"uint256\"}],\"name\":\"setProtocolFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_protocolFeeLight\",\"type\":\"uint256\"}],\"name\":\"setProtocolFeeLight\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_protocolFeeWallet\",\"type\":\"address\"}],\"name\":\"setProtocolFeeWallet\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_rebateMax\",\"type\":\"uint256\"}],\"name\":\"setRebateMax\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_rebateScale\",\"type\":\"uint256\"}],\"name\":\"setRebateScale\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newstaking\",\"type\":\"address\"}],\"name\":\"setStaking\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"staking\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"signerWallet\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"signerToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"signerAmount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"senderToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"senderAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"swap\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"signerWallet\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"signerToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"signerAmount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"senderToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"senderAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"swapAnySender\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"signerWallet\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"signerToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"signerAmount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"senderToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"senderAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"swapLight\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]" ;
     #[doc = r" The parsed JSON-ABI of the contract."]
-    pub static SWAPERC20_ABI: ethers::contract::Lazy<ethers::core::abi::Abi> =
+    pub static ISWAPERC20_ABI: ethers::contract::Lazy<ethers::core::abi::Abi> =
         ethers::contract::Lazy::new(|| {
             ethers::core::utils::__serde_json::from_str(__ABI).expect("invalid abi")
         });
-    pub struct SwapERC20<M>(ethers::contract::Contract<M>);
-    impl<M> Clone for SwapERC20<M> {
+    pub struct ISwapERC20<M>(ethers::contract::Contract<M>);
+    impl<M> Clone for ISwapERC20<M> {
         fn clone(&self) -> Self {
-            SwapERC20(self.0.clone())
+            ISwapERC20(self.0.clone())
         }
     }
-    impl<M> std::ops::Deref for SwapERC20<M> {
+    impl<M> std::ops::Deref for ISwapERC20<M> {
         type Target = ethers::contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
             &self.0
         }
     }
-    impl<M> std::fmt::Debug for SwapERC20<M> {
+    impl<M> std::fmt::Debug for ISwapERC20<M> {
         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-            f.debug_tuple(stringify!(SwapERC20))
+            f.debug_tuple(stringify!(ISwapERC20))
                 .field(&self.address())
                 .finish()
         }
     }
-    impl<M: ethers::providers::Middleware> SwapERC20<M> {
+    impl<M: ethers::providers::Middleware> ISwapERC20<M> {
         #[doc = r" Creates a new contract instance with the specified `ethers`"]
         #[doc = r" client at the given `Address`. The contract derefs to a `ethers::Contract`"]
         #[doc = r" object"]
@@ -49,7 +49,7 @@ pub mod swap_erc20 {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            ethers::contract::Contract::new(address.into(), SWAPERC20_ABI.clone(), client).into()
+            ethers::contract::Contract::new(address.into(), ISWAPERC20_ABI.clone(), client).into()
         }
         #[doc = "Calls the contract's `DOMAIN_CHAIN_ID` (0x416f281d) function"]
         pub fn domain_chain_id(
@@ -487,11 +487,11 @@ pub mod swap_erc20 {
             self.0.event()
         }
         #[doc = r" Returns an [`Event`](#ethers_contract::builders::Event) builder for all events of this contract"]
-        pub fn events(&self) -> ethers::contract::builders::Event<M, SwapERC20Events> {
+        pub fn events(&self) -> ethers::contract::builders::Event<M, ISwapERC20Events> {
             self.0.event_with_filter(Default::default())
         }
     }
-    impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>> for SwapERC20<M> {
+    impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>> for ISwapERC20<M> {
         fn from(contract: ethers::contract::Contract<M>) -> Self {
             Self(contract)
         }
@@ -671,7 +671,7 @@ pub mod swap_erc20 {
         pub sender_amount: ethers::core::types::U256,
     }
     #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
-    pub enum SwapERC20Events {
+    pub enum ISwapERC20Events {
         AuthorizeFilter(AuthorizeFilter),
         CancelFilter(CancelFilter),
         OwnershipTransferredFilter(OwnershipTransferredFilter),
@@ -684,7 +684,7 @@ pub mod swap_erc20 {
         SetStakingFilter(SetStakingFilter),
         SwapFilter(SwapFilter),
     }
-    impl ethers::contract::EthLogDecode for SwapERC20Events {
+    impl ethers::contract::EthLogDecode for ISwapERC20Events {
         fn decode_log(
             log: &ethers::core::abi::RawLog,
         ) -> ::std::result::Result<Self, ethers::core::abi::Error>
@@ -692,55 +692,55 @@ pub mod swap_erc20 {
             Self: Sized,
         {
             if let Ok(decoded) = AuthorizeFilter::decode_log(log) {
-                return Ok(SwapERC20Events::AuthorizeFilter(decoded));
+                return Ok(ISwapERC20Events::AuthorizeFilter(decoded));
             }
             if let Ok(decoded) = CancelFilter::decode_log(log) {
-                return Ok(SwapERC20Events::CancelFilter(decoded));
+                return Ok(ISwapERC20Events::CancelFilter(decoded));
             }
             if let Ok(decoded) = OwnershipTransferredFilter::decode_log(log) {
-                return Ok(SwapERC20Events::OwnershipTransferredFilter(decoded));
+                return Ok(ISwapERC20Events::OwnershipTransferredFilter(decoded));
             }
             if let Ok(decoded) = RevokeFilter::decode_log(log) {
-                return Ok(SwapERC20Events::RevokeFilter(decoded));
+                return Ok(ISwapERC20Events::RevokeFilter(decoded));
             }
             if let Ok(decoded) = SetProtocolFeeFilter::decode_log(log) {
-                return Ok(SwapERC20Events::SetProtocolFeeFilter(decoded));
+                return Ok(ISwapERC20Events::SetProtocolFeeFilter(decoded));
             }
             if let Ok(decoded) = SetProtocolFeeLightFilter::decode_log(log) {
-                return Ok(SwapERC20Events::SetProtocolFeeLightFilter(decoded));
+                return Ok(ISwapERC20Events::SetProtocolFeeLightFilter(decoded));
             }
             if let Ok(decoded) = SetProtocolFeeWalletFilter::decode_log(log) {
-                return Ok(SwapERC20Events::SetProtocolFeeWalletFilter(decoded));
+                return Ok(ISwapERC20Events::SetProtocolFeeWalletFilter(decoded));
             }
             if let Ok(decoded) = SetRebateMaxFilter::decode_log(log) {
-                return Ok(SwapERC20Events::SetRebateMaxFilter(decoded));
+                return Ok(ISwapERC20Events::SetRebateMaxFilter(decoded));
             }
             if let Ok(decoded) = SetRebateScaleFilter::decode_log(log) {
-                return Ok(SwapERC20Events::SetRebateScaleFilter(decoded));
+                return Ok(ISwapERC20Events::SetRebateScaleFilter(decoded));
             }
             if let Ok(decoded) = SetStakingFilter::decode_log(log) {
-                return Ok(SwapERC20Events::SetStakingFilter(decoded));
+                return Ok(ISwapERC20Events::SetStakingFilter(decoded));
             }
             if let Ok(decoded) = SwapFilter::decode_log(log) {
-                return Ok(SwapERC20Events::SwapFilter(decoded));
+                return Ok(ISwapERC20Events::SwapFilter(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData)
         }
     }
-    impl ::std::fmt::Display for SwapERC20Events {
+    impl ::std::fmt::Display for ISwapERC20Events {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                SwapERC20Events::AuthorizeFilter(element) => element.fmt(f),
-                SwapERC20Events::CancelFilter(element) => element.fmt(f),
-                SwapERC20Events::OwnershipTransferredFilter(element) => element.fmt(f),
-                SwapERC20Events::RevokeFilter(element) => element.fmt(f),
-                SwapERC20Events::SetProtocolFeeFilter(element) => element.fmt(f),
-                SwapERC20Events::SetProtocolFeeLightFilter(element) => element.fmt(f),
-                SwapERC20Events::SetProtocolFeeWalletFilter(element) => element.fmt(f),
-                SwapERC20Events::SetRebateMaxFilter(element) => element.fmt(f),
-                SwapERC20Events::SetRebateScaleFilter(element) => element.fmt(f),
-                SwapERC20Events::SetStakingFilter(element) => element.fmt(f),
-                SwapERC20Events::SwapFilter(element) => element.fmt(f),
+                ISwapERC20Events::AuthorizeFilter(element) => element.fmt(f),
+                ISwapERC20Events::CancelFilter(element) => element.fmt(f),
+                ISwapERC20Events::OwnershipTransferredFilter(element) => element.fmt(f),
+                ISwapERC20Events::RevokeFilter(element) => element.fmt(f),
+                ISwapERC20Events::SetProtocolFeeFilter(element) => element.fmt(f),
+                ISwapERC20Events::SetProtocolFeeLightFilter(element) => element.fmt(f),
+                ISwapERC20Events::SetProtocolFeeWalletFilter(element) => element.fmt(f),
+                ISwapERC20Events::SetRebateMaxFilter(element) => element.fmt(f),
+                ISwapERC20Events::SetRebateScaleFilter(element) => element.fmt(f),
+                ISwapERC20Events::SetStakingFilter(element) => element.fmt(f),
+                ISwapERC20Events::SwapFilter(element) => element.fmt(f),
             }
         }
     }
@@ -1242,7 +1242,7 @@ pub mod swap_erc20 {
         pub new_owner: ethers::core::types::Address,
     }
     #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
-    pub enum SwapERC20Calls {
+    pub enum ISwapERC20Calls {
         DomainChainId(DomainChainIdCall),
         DomainName(DomainNameCall),
         DomainSeparator(DomainSeparatorCall),
@@ -1278,425 +1278,425 @@ pub mod swap_erc20 {
         SwapLight(SwapLightCall),
         TransferOwnership(TransferOwnershipCall),
     }
-    impl ethers::core::abi::AbiDecode for SwapERC20Calls {
+    impl ethers::core::abi::AbiDecode for ISwapERC20Calls {
         fn decode(
             data: impl AsRef<[u8]>,
         ) -> ::std::result::Result<Self, ethers::core::abi::AbiError> {
             if let Ok(decoded) =
                 <DomainChainIdCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::DomainChainId(decoded));
+                return Ok(ISwapERC20Calls::DomainChainId(decoded));
             }
             if let Ok(decoded) =
                 <DomainNameCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::DomainName(decoded));
+                return Ok(ISwapERC20Calls::DomainName(decoded));
             }
             if let Ok(decoded) =
                 <DomainSeparatorCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::DomainSeparator(decoded));
+                return Ok(ISwapERC20Calls::DomainSeparator(decoded));
             }
             if let Ok(decoded) =
                 <DomainTypehashCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::DomainTypehash(decoded));
+                return Ok(ISwapERC20Calls::DomainTypehash(decoded));
             }
             if let Ok(decoded) =
                 <DomainVersionCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::DomainVersion(decoded));
+                return Ok(ISwapERC20Calls::DomainVersion(decoded));
             }
             if let Ok(decoded) =
                 <FeeDivisorCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::FeeDivisor(decoded));
+                return Ok(ISwapERC20Calls::FeeDivisor(decoded));
             }
             if let Ok(decoded) =
                 <OrderTypehashCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::OrderTypehash(decoded));
+                return Ok(ISwapERC20Calls::OrderTypehash(decoded));
             }
             if let Ok(decoded) =
                 <AuthorizeCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::Authorize(decoded));
+                return Ok(ISwapERC20Calls::Authorize(decoded));
             }
             if let Ok(decoded) =
                 <AuthorizedCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::Authorized(decoded));
+                return Ok(ISwapERC20Calls::Authorized(decoded));
             }
             if let Ok(decoded) =
                 <CalculateDiscountCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::CalculateDiscount(decoded));
+                return Ok(ISwapERC20Calls::CalculateDiscount(decoded));
             }
             if let Ok(decoded) =
                 <CalculateProtocolFeeCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::CalculateProtocolFee(decoded));
+                return Ok(ISwapERC20Calls::CalculateProtocolFee(decoded));
             }
             if let Ok(decoded) = <CancelCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::Cancel(decoded));
+                return Ok(ISwapERC20Calls::Cancel(decoded));
             }
             if let Ok(decoded) = <CheckCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::Check(decoded));
+                return Ok(ISwapERC20Calls::Check(decoded));
             }
             if let Ok(decoded) =
                 <GetChainIdCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::GetChainId(decoded));
+                return Ok(ISwapERC20Calls::GetChainId(decoded));
             }
             if let Ok(decoded) =
                 <NonceUsedCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::NonceUsed(decoded));
+                return Ok(ISwapERC20Calls::NonceUsed(decoded));
             }
             if let Ok(decoded) = <OwnerCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::Owner(decoded));
+                return Ok(ISwapERC20Calls::Owner(decoded));
             }
             if let Ok(decoded) =
                 <ProtocolFeeCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::ProtocolFee(decoded));
+                return Ok(ISwapERC20Calls::ProtocolFee(decoded));
             }
             if let Ok(decoded) =
                 <ProtocolFeeLightCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::ProtocolFeeLight(decoded));
+                return Ok(ISwapERC20Calls::ProtocolFeeLight(decoded));
             }
             if let Ok(decoded) =
                 <ProtocolFeeWalletCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::ProtocolFeeWallet(decoded));
+                return Ok(ISwapERC20Calls::ProtocolFeeWallet(decoded));
             }
             if let Ok(decoded) =
                 <RebateMaxCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::RebateMax(decoded));
+                return Ok(ISwapERC20Calls::RebateMax(decoded));
             }
             if let Ok(decoded) =
                 <RebateScaleCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::RebateScale(decoded));
+                return Ok(ISwapERC20Calls::RebateScale(decoded));
             }
             if let Ok(decoded) =
                 <RenounceOwnershipCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::RenounceOwnership(decoded));
+                return Ok(ISwapERC20Calls::RenounceOwnership(decoded));
             }
             if let Ok(decoded) = <RevokeCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::Revoke(decoded));
+                return Ok(ISwapERC20Calls::Revoke(decoded));
             }
             if let Ok(decoded) =
                 <SetProtocolFeeCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::SetProtocolFee(decoded));
+                return Ok(ISwapERC20Calls::SetProtocolFee(decoded));
             }
             if let Ok(decoded) =
                 <SetProtocolFeeLightCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::SetProtocolFeeLight(decoded));
+                return Ok(ISwapERC20Calls::SetProtocolFeeLight(decoded));
             }
             if let Ok(decoded) =
                 <SetProtocolFeeWalletCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::SetProtocolFeeWallet(decoded));
+                return Ok(ISwapERC20Calls::SetProtocolFeeWallet(decoded));
             }
             if let Ok(decoded) =
                 <SetRebateMaxCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::SetRebateMax(decoded));
+                return Ok(ISwapERC20Calls::SetRebateMax(decoded));
             }
             if let Ok(decoded) =
                 <SetRebateScaleCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::SetRebateScale(decoded));
+                return Ok(ISwapERC20Calls::SetRebateScale(decoded));
             }
             if let Ok(decoded) =
                 <SetStakingCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::SetStaking(decoded));
+                return Ok(ISwapERC20Calls::SetStaking(decoded));
             }
             if let Ok(decoded) =
                 <StakingCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::Staking(decoded));
+                return Ok(ISwapERC20Calls::Staking(decoded));
             }
             if let Ok(decoded) = <SwapCall as ethers::core::abi::AbiDecode>::decode(data.as_ref()) {
-                return Ok(SwapERC20Calls::Swap(decoded));
+                return Ok(ISwapERC20Calls::Swap(decoded));
             }
             if let Ok(decoded) =
                 <SwapAnySenderCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::SwapAnySender(decoded));
+                return Ok(ISwapERC20Calls::SwapAnySender(decoded));
             }
             if let Ok(decoded) =
                 <SwapLightCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::SwapLight(decoded));
+                return Ok(ISwapERC20Calls::SwapLight(decoded));
             }
             if let Ok(decoded) =
                 <TransferOwnershipCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(SwapERC20Calls::TransferOwnership(decoded));
+                return Ok(ISwapERC20Calls::TransferOwnership(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData.into())
         }
     }
-    impl ethers::core::abi::AbiEncode for SwapERC20Calls {
+    impl ethers::core::abi::AbiEncode for ISwapERC20Calls {
         fn encode(self) -> Vec<u8> {
             match self {
-                SwapERC20Calls::DomainChainId(element) => element.encode(),
-                SwapERC20Calls::DomainName(element) => element.encode(),
-                SwapERC20Calls::DomainSeparator(element) => element.encode(),
-                SwapERC20Calls::DomainTypehash(element) => element.encode(),
-                SwapERC20Calls::DomainVersion(element) => element.encode(),
-                SwapERC20Calls::FeeDivisor(element) => element.encode(),
-                SwapERC20Calls::OrderTypehash(element) => element.encode(),
-                SwapERC20Calls::Authorize(element) => element.encode(),
-                SwapERC20Calls::Authorized(element) => element.encode(),
-                SwapERC20Calls::CalculateDiscount(element) => element.encode(),
-                SwapERC20Calls::CalculateProtocolFee(element) => element.encode(),
-                SwapERC20Calls::Cancel(element) => element.encode(),
-                SwapERC20Calls::Check(element) => element.encode(),
-                SwapERC20Calls::GetChainId(element) => element.encode(),
-                SwapERC20Calls::NonceUsed(element) => element.encode(),
-                SwapERC20Calls::Owner(element) => element.encode(),
-                SwapERC20Calls::ProtocolFee(element) => element.encode(),
-                SwapERC20Calls::ProtocolFeeLight(element) => element.encode(),
-                SwapERC20Calls::ProtocolFeeWallet(element) => element.encode(),
-                SwapERC20Calls::RebateMax(element) => element.encode(),
-                SwapERC20Calls::RebateScale(element) => element.encode(),
-                SwapERC20Calls::RenounceOwnership(element) => element.encode(),
-                SwapERC20Calls::Revoke(element) => element.encode(),
-                SwapERC20Calls::SetProtocolFee(element) => element.encode(),
-                SwapERC20Calls::SetProtocolFeeLight(element) => element.encode(),
-                SwapERC20Calls::SetProtocolFeeWallet(element) => element.encode(),
-                SwapERC20Calls::SetRebateMax(element) => element.encode(),
-                SwapERC20Calls::SetRebateScale(element) => element.encode(),
-                SwapERC20Calls::SetStaking(element) => element.encode(),
-                SwapERC20Calls::Staking(element) => element.encode(),
-                SwapERC20Calls::Swap(element) => element.encode(),
-                SwapERC20Calls::SwapAnySender(element) => element.encode(),
-                SwapERC20Calls::SwapLight(element) => element.encode(),
-                SwapERC20Calls::TransferOwnership(element) => element.encode(),
+                ISwapERC20Calls::DomainChainId(element) => element.encode(),
+                ISwapERC20Calls::DomainName(element) => element.encode(),
+                ISwapERC20Calls::DomainSeparator(element) => element.encode(),
+                ISwapERC20Calls::DomainTypehash(element) => element.encode(),
+                ISwapERC20Calls::DomainVersion(element) => element.encode(),
+                ISwapERC20Calls::FeeDivisor(element) => element.encode(),
+                ISwapERC20Calls::OrderTypehash(element) => element.encode(),
+                ISwapERC20Calls::Authorize(element) => element.encode(),
+                ISwapERC20Calls::Authorized(element) => element.encode(),
+                ISwapERC20Calls::CalculateDiscount(element) => element.encode(),
+                ISwapERC20Calls::CalculateProtocolFee(element) => element.encode(),
+                ISwapERC20Calls::Cancel(element) => element.encode(),
+                ISwapERC20Calls::Check(element) => element.encode(),
+                ISwapERC20Calls::GetChainId(element) => element.encode(),
+                ISwapERC20Calls::NonceUsed(element) => element.encode(),
+                ISwapERC20Calls::Owner(element) => element.encode(),
+                ISwapERC20Calls::ProtocolFee(element) => element.encode(),
+                ISwapERC20Calls::ProtocolFeeLight(element) => element.encode(),
+                ISwapERC20Calls::ProtocolFeeWallet(element) => element.encode(),
+                ISwapERC20Calls::RebateMax(element) => element.encode(),
+                ISwapERC20Calls::RebateScale(element) => element.encode(),
+                ISwapERC20Calls::RenounceOwnership(element) => element.encode(),
+                ISwapERC20Calls::Revoke(element) => element.encode(),
+                ISwapERC20Calls::SetProtocolFee(element) => element.encode(),
+                ISwapERC20Calls::SetProtocolFeeLight(element) => element.encode(),
+                ISwapERC20Calls::SetProtocolFeeWallet(element) => element.encode(),
+                ISwapERC20Calls::SetRebateMax(element) => element.encode(),
+                ISwapERC20Calls::SetRebateScale(element) => element.encode(),
+                ISwapERC20Calls::SetStaking(element) => element.encode(),
+                ISwapERC20Calls::Staking(element) => element.encode(),
+                ISwapERC20Calls::Swap(element) => element.encode(),
+                ISwapERC20Calls::SwapAnySender(element) => element.encode(),
+                ISwapERC20Calls::SwapLight(element) => element.encode(),
+                ISwapERC20Calls::TransferOwnership(element) => element.encode(),
             }
         }
     }
-    impl ::std::fmt::Display for SwapERC20Calls {
+    impl ::std::fmt::Display for ISwapERC20Calls {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                SwapERC20Calls::DomainChainId(element) => element.fmt(f),
-                SwapERC20Calls::DomainName(element) => element.fmt(f),
-                SwapERC20Calls::DomainSeparator(element) => element.fmt(f),
-                SwapERC20Calls::DomainTypehash(element) => element.fmt(f),
-                SwapERC20Calls::DomainVersion(element) => element.fmt(f),
-                SwapERC20Calls::FeeDivisor(element) => element.fmt(f),
-                SwapERC20Calls::OrderTypehash(element) => element.fmt(f),
-                SwapERC20Calls::Authorize(element) => element.fmt(f),
-                SwapERC20Calls::Authorized(element) => element.fmt(f),
-                SwapERC20Calls::CalculateDiscount(element) => element.fmt(f),
-                SwapERC20Calls::CalculateProtocolFee(element) => element.fmt(f),
-                SwapERC20Calls::Cancel(element) => element.fmt(f),
-                SwapERC20Calls::Check(element) => element.fmt(f),
-                SwapERC20Calls::GetChainId(element) => element.fmt(f),
-                SwapERC20Calls::NonceUsed(element) => element.fmt(f),
-                SwapERC20Calls::Owner(element) => element.fmt(f),
-                SwapERC20Calls::ProtocolFee(element) => element.fmt(f),
-                SwapERC20Calls::ProtocolFeeLight(element) => element.fmt(f),
-                SwapERC20Calls::ProtocolFeeWallet(element) => element.fmt(f),
-                SwapERC20Calls::RebateMax(element) => element.fmt(f),
-                SwapERC20Calls::RebateScale(element) => element.fmt(f),
-                SwapERC20Calls::RenounceOwnership(element) => element.fmt(f),
-                SwapERC20Calls::Revoke(element) => element.fmt(f),
-                SwapERC20Calls::SetProtocolFee(element) => element.fmt(f),
-                SwapERC20Calls::SetProtocolFeeLight(element) => element.fmt(f),
-                SwapERC20Calls::SetProtocolFeeWallet(element) => element.fmt(f),
-                SwapERC20Calls::SetRebateMax(element) => element.fmt(f),
-                SwapERC20Calls::SetRebateScale(element) => element.fmt(f),
-                SwapERC20Calls::SetStaking(element) => element.fmt(f),
-                SwapERC20Calls::Staking(element) => element.fmt(f),
-                SwapERC20Calls::Swap(element) => element.fmt(f),
-                SwapERC20Calls::SwapAnySender(element) => element.fmt(f),
-                SwapERC20Calls::SwapLight(element) => element.fmt(f),
-                SwapERC20Calls::TransferOwnership(element) => element.fmt(f),
+                ISwapERC20Calls::DomainChainId(element) => element.fmt(f),
+                ISwapERC20Calls::DomainName(element) => element.fmt(f),
+                ISwapERC20Calls::DomainSeparator(element) => element.fmt(f),
+                ISwapERC20Calls::DomainTypehash(element) => element.fmt(f),
+                ISwapERC20Calls::DomainVersion(element) => element.fmt(f),
+                ISwapERC20Calls::FeeDivisor(element) => element.fmt(f),
+                ISwapERC20Calls::OrderTypehash(element) => element.fmt(f),
+                ISwapERC20Calls::Authorize(element) => element.fmt(f),
+                ISwapERC20Calls::Authorized(element) => element.fmt(f),
+                ISwapERC20Calls::CalculateDiscount(element) => element.fmt(f),
+                ISwapERC20Calls::CalculateProtocolFee(element) => element.fmt(f),
+                ISwapERC20Calls::Cancel(element) => element.fmt(f),
+                ISwapERC20Calls::Check(element) => element.fmt(f),
+                ISwapERC20Calls::GetChainId(element) => element.fmt(f),
+                ISwapERC20Calls::NonceUsed(element) => element.fmt(f),
+                ISwapERC20Calls::Owner(element) => element.fmt(f),
+                ISwapERC20Calls::ProtocolFee(element) => element.fmt(f),
+                ISwapERC20Calls::ProtocolFeeLight(element) => element.fmt(f),
+                ISwapERC20Calls::ProtocolFeeWallet(element) => element.fmt(f),
+                ISwapERC20Calls::RebateMax(element) => element.fmt(f),
+                ISwapERC20Calls::RebateScale(element) => element.fmt(f),
+                ISwapERC20Calls::RenounceOwnership(element) => element.fmt(f),
+                ISwapERC20Calls::Revoke(element) => element.fmt(f),
+                ISwapERC20Calls::SetProtocolFee(element) => element.fmt(f),
+                ISwapERC20Calls::SetProtocolFeeLight(element) => element.fmt(f),
+                ISwapERC20Calls::SetProtocolFeeWallet(element) => element.fmt(f),
+                ISwapERC20Calls::SetRebateMax(element) => element.fmt(f),
+                ISwapERC20Calls::SetRebateScale(element) => element.fmt(f),
+                ISwapERC20Calls::SetStaking(element) => element.fmt(f),
+                ISwapERC20Calls::Staking(element) => element.fmt(f),
+                ISwapERC20Calls::Swap(element) => element.fmt(f),
+                ISwapERC20Calls::SwapAnySender(element) => element.fmt(f),
+                ISwapERC20Calls::SwapLight(element) => element.fmt(f),
+                ISwapERC20Calls::TransferOwnership(element) => element.fmt(f),
             }
         }
     }
-    impl ::std::convert::From<DomainChainIdCall> for SwapERC20Calls {
+    impl ::std::convert::From<DomainChainIdCall> for ISwapERC20Calls {
         fn from(var: DomainChainIdCall) -> Self {
-            SwapERC20Calls::DomainChainId(var)
+            ISwapERC20Calls::DomainChainId(var)
         }
     }
-    impl ::std::convert::From<DomainNameCall> for SwapERC20Calls {
+    impl ::std::convert::From<DomainNameCall> for ISwapERC20Calls {
         fn from(var: DomainNameCall) -> Self {
-            SwapERC20Calls::DomainName(var)
+            ISwapERC20Calls::DomainName(var)
         }
     }
-    impl ::std::convert::From<DomainSeparatorCall> for SwapERC20Calls {
+    impl ::std::convert::From<DomainSeparatorCall> for ISwapERC20Calls {
         fn from(var: DomainSeparatorCall) -> Self {
-            SwapERC20Calls::DomainSeparator(var)
+            ISwapERC20Calls::DomainSeparator(var)
         }
     }
-    impl ::std::convert::From<DomainTypehashCall> for SwapERC20Calls {
+    impl ::std::convert::From<DomainTypehashCall> for ISwapERC20Calls {
         fn from(var: DomainTypehashCall) -> Self {
-            SwapERC20Calls::DomainTypehash(var)
+            ISwapERC20Calls::DomainTypehash(var)
         }
     }
-    impl ::std::convert::From<DomainVersionCall> for SwapERC20Calls {
+    impl ::std::convert::From<DomainVersionCall> for ISwapERC20Calls {
         fn from(var: DomainVersionCall) -> Self {
-            SwapERC20Calls::DomainVersion(var)
+            ISwapERC20Calls::DomainVersion(var)
         }
     }
-    impl ::std::convert::From<FeeDivisorCall> for SwapERC20Calls {
+    impl ::std::convert::From<FeeDivisorCall> for ISwapERC20Calls {
         fn from(var: FeeDivisorCall) -> Self {
-            SwapERC20Calls::FeeDivisor(var)
+            ISwapERC20Calls::FeeDivisor(var)
         }
     }
-    impl ::std::convert::From<OrderTypehashCall> for SwapERC20Calls {
+    impl ::std::convert::From<OrderTypehashCall> for ISwapERC20Calls {
         fn from(var: OrderTypehashCall) -> Self {
-            SwapERC20Calls::OrderTypehash(var)
+            ISwapERC20Calls::OrderTypehash(var)
         }
     }
-    impl ::std::convert::From<AuthorizeCall> for SwapERC20Calls {
+    impl ::std::convert::From<AuthorizeCall> for ISwapERC20Calls {
         fn from(var: AuthorizeCall) -> Self {
-            SwapERC20Calls::Authorize(var)
+            ISwapERC20Calls::Authorize(var)
         }
     }
-    impl ::std::convert::From<AuthorizedCall> for SwapERC20Calls {
+    impl ::std::convert::From<AuthorizedCall> for ISwapERC20Calls {
         fn from(var: AuthorizedCall) -> Self {
-            SwapERC20Calls::Authorized(var)
+            ISwapERC20Calls::Authorized(var)
         }
     }
-    impl ::std::convert::From<CalculateDiscountCall> for SwapERC20Calls {
+    impl ::std::convert::From<CalculateDiscountCall> for ISwapERC20Calls {
         fn from(var: CalculateDiscountCall) -> Self {
-            SwapERC20Calls::CalculateDiscount(var)
+            ISwapERC20Calls::CalculateDiscount(var)
         }
     }
-    impl ::std::convert::From<CalculateProtocolFeeCall> for SwapERC20Calls {
+    impl ::std::convert::From<CalculateProtocolFeeCall> for ISwapERC20Calls {
         fn from(var: CalculateProtocolFeeCall) -> Self {
-            SwapERC20Calls::CalculateProtocolFee(var)
+            ISwapERC20Calls::CalculateProtocolFee(var)
         }
     }
-    impl ::std::convert::From<CancelCall> for SwapERC20Calls {
+    impl ::std::convert::From<CancelCall> for ISwapERC20Calls {
         fn from(var: CancelCall) -> Self {
-            SwapERC20Calls::Cancel(var)
+            ISwapERC20Calls::Cancel(var)
         }
     }
-    impl ::std::convert::From<CheckCall> for SwapERC20Calls {
+    impl ::std::convert::From<CheckCall> for ISwapERC20Calls {
         fn from(var: CheckCall) -> Self {
-            SwapERC20Calls::Check(var)
+            ISwapERC20Calls::Check(var)
         }
     }
-    impl ::std::convert::From<GetChainIdCall> for SwapERC20Calls {
+    impl ::std::convert::From<GetChainIdCall> for ISwapERC20Calls {
         fn from(var: GetChainIdCall) -> Self {
-            SwapERC20Calls::GetChainId(var)
+            ISwapERC20Calls::GetChainId(var)
         }
     }
-    impl ::std::convert::From<NonceUsedCall> for SwapERC20Calls {
+    impl ::std::convert::From<NonceUsedCall> for ISwapERC20Calls {
         fn from(var: NonceUsedCall) -> Self {
-            SwapERC20Calls::NonceUsed(var)
+            ISwapERC20Calls::NonceUsed(var)
         }
     }
-    impl ::std::convert::From<OwnerCall> for SwapERC20Calls {
+    impl ::std::convert::From<OwnerCall> for ISwapERC20Calls {
         fn from(var: OwnerCall) -> Self {
-            SwapERC20Calls::Owner(var)
+            ISwapERC20Calls::Owner(var)
         }
     }
-    impl ::std::convert::From<ProtocolFeeCall> for SwapERC20Calls {
+    impl ::std::convert::From<ProtocolFeeCall> for ISwapERC20Calls {
         fn from(var: ProtocolFeeCall) -> Self {
-            SwapERC20Calls::ProtocolFee(var)
+            ISwapERC20Calls::ProtocolFee(var)
         }
     }
-    impl ::std::convert::From<ProtocolFeeLightCall> for SwapERC20Calls {
+    impl ::std::convert::From<ProtocolFeeLightCall> for ISwapERC20Calls {
         fn from(var: ProtocolFeeLightCall) -> Self {
-            SwapERC20Calls::ProtocolFeeLight(var)
+            ISwapERC20Calls::ProtocolFeeLight(var)
         }
     }
-    impl ::std::convert::From<ProtocolFeeWalletCall> for SwapERC20Calls {
+    impl ::std::convert::From<ProtocolFeeWalletCall> for ISwapERC20Calls {
         fn from(var: ProtocolFeeWalletCall) -> Self {
-            SwapERC20Calls::ProtocolFeeWallet(var)
+            ISwapERC20Calls::ProtocolFeeWallet(var)
         }
     }
-    impl ::std::convert::From<RebateMaxCall> for SwapERC20Calls {
+    impl ::std::convert::From<RebateMaxCall> for ISwapERC20Calls {
         fn from(var: RebateMaxCall) -> Self {
-            SwapERC20Calls::RebateMax(var)
+            ISwapERC20Calls::RebateMax(var)
         }
     }
-    impl ::std::convert::From<RebateScaleCall> for SwapERC20Calls {
+    impl ::std::convert::From<RebateScaleCall> for ISwapERC20Calls {
         fn from(var: RebateScaleCall) -> Self {
-            SwapERC20Calls::RebateScale(var)
+            ISwapERC20Calls::RebateScale(var)
         }
     }
-    impl ::std::convert::From<RenounceOwnershipCall> for SwapERC20Calls {
+    impl ::std::convert::From<RenounceOwnershipCall> for ISwapERC20Calls {
         fn from(var: RenounceOwnershipCall) -> Self {
-            SwapERC20Calls::RenounceOwnership(var)
+            ISwapERC20Calls::RenounceOwnership(var)
         }
     }
-    impl ::std::convert::From<RevokeCall> for SwapERC20Calls {
+    impl ::std::convert::From<RevokeCall> for ISwapERC20Calls {
         fn from(var: RevokeCall) -> Self {
-            SwapERC20Calls::Revoke(var)
+            ISwapERC20Calls::Revoke(var)
         }
     }
-    impl ::std::convert::From<SetProtocolFeeCall> for SwapERC20Calls {
+    impl ::std::convert::From<SetProtocolFeeCall> for ISwapERC20Calls {
         fn from(var: SetProtocolFeeCall) -> Self {
-            SwapERC20Calls::SetProtocolFee(var)
+            ISwapERC20Calls::SetProtocolFee(var)
         }
     }
-    impl ::std::convert::From<SetProtocolFeeLightCall> for SwapERC20Calls {
+    impl ::std::convert::From<SetProtocolFeeLightCall> for ISwapERC20Calls {
         fn from(var: SetProtocolFeeLightCall) -> Self {
-            SwapERC20Calls::SetProtocolFeeLight(var)
+            ISwapERC20Calls::SetProtocolFeeLight(var)
         }
     }
-    impl ::std::convert::From<SetProtocolFeeWalletCall> for SwapERC20Calls {
+    impl ::std::convert::From<SetProtocolFeeWalletCall> for ISwapERC20Calls {
         fn from(var: SetProtocolFeeWalletCall) -> Self {
-            SwapERC20Calls::SetProtocolFeeWallet(var)
+            ISwapERC20Calls::SetProtocolFeeWallet(var)
         }
     }
-    impl ::std::convert::From<SetRebateMaxCall> for SwapERC20Calls {
+    impl ::std::convert::From<SetRebateMaxCall> for ISwapERC20Calls {
         fn from(var: SetRebateMaxCall) -> Self {
-            SwapERC20Calls::SetRebateMax(var)
+            ISwapERC20Calls::SetRebateMax(var)
         }
     }
-    impl ::std::convert::From<SetRebateScaleCall> for SwapERC20Calls {
+    impl ::std::convert::From<SetRebateScaleCall> for ISwapERC20Calls {
         fn from(var: SetRebateScaleCall) -> Self {
-            SwapERC20Calls::SetRebateScale(var)
+            ISwapERC20Calls::SetRebateScale(var)
         }
     }
-    impl ::std::convert::From<SetStakingCall> for SwapERC20Calls {
+    impl ::std::convert::From<SetStakingCall> for ISwapERC20Calls {
         fn from(var: SetStakingCall) -> Self {
-            SwapERC20Calls::SetStaking(var)
+            ISwapERC20Calls::SetStaking(var)
         }
     }
-    impl ::std::convert::From<StakingCall> for SwapERC20Calls {
+    impl ::std::convert::From<StakingCall> for ISwapERC20Calls {
         fn from(var: StakingCall) -> Self {
-            SwapERC20Calls::Staking(var)
+            ISwapERC20Calls::Staking(var)
         }
     }
-    impl ::std::convert::From<SwapCall> for SwapERC20Calls {
+    impl ::std::convert::From<SwapCall> for ISwapERC20Calls {
         fn from(var: SwapCall) -> Self {
-            SwapERC20Calls::Swap(var)
+            ISwapERC20Calls::Swap(var)
         }
     }
-    impl ::std::convert::From<SwapAnySenderCall> for SwapERC20Calls {
+    impl ::std::convert::From<SwapAnySenderCall> for ISwapERC20Calls {
         fn from(var: SwapAnySenderCall) -> Self {
-            SwapERC20Calls::SwapAnySender(var)
+            ISwapERC20Calls::SwapAnySender(var)
         }
     }
-    impl ::std::convert::From<SwapLightCall> for SwapERC20Calls {
+    impl ::std::convert::From<SwapLightCall> for ISwapERC20Calls {
         fn from(var: SwapLightCall) -> Self {
-            SwapERC20Calls::SwapLight(var)
+            ISwapERC20Calls::SwapLight(var)
         }
     }
-    impl ::std::convert::From<TransferOwnershipCall> for SwapERC20Calls {
+    impl ::std::convert::From<TransferOwnershipCall> for ISwapERC20Calls {
         fn from(var: TransferOwnershipCall) -> Self {
-            SwapERC20Calls::TransferOwnership(var)
+            ISwapERC20Calls::TransferOwnership(var)
         }
     }
     #[doc = "Container type for all return fields from the `DOMAIN_CHAIN_ID` function with signature `DOMAIN_CHAIN_ID()` and selector `[65, 111, 40, 29]`"]

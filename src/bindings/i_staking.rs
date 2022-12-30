@@ -1,6 +1,6 @@
-pub use staking::*;
+pub use i_staking::*;
 #[allow(clippy::too_many_arguments, non_camel_case_types)]
-pub mod staking {
+pub mod i_staking {
     #![allow(clippy::enum_variant_names)]
     #![allow(dead_code)]
     #![allow(clippy::type_complexity)]
@@ -14,34 +14,34 @@ pub mod staking {
         types::*,
     };
     use ethers::providers::Middleware;
-    #[doc = "Staking was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
+    #[doc = "IStaking was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
     use std::sync::Arc;
     # [rustfmt :: skip] const __ABI : & str = "[{\"inputs\":[{\"internalType\":\"contract ERC20\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_symbol\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_duration\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_minDelay\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"CancelDurationChange\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"newDuration\",\"type\":\"uint256\"}],\"name\":\"CompleteDurationChange\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"delegate\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"ProposeDelegate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"unlockTimestamp\",\"type\":\"uint256\"}],\"name\":\"ScheduleDurationChange\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"delegate\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"SetDelegate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokens\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"accountDelegates\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"available\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"total\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"cancelDurationChange\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"delegateAccounts\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"duration\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"getStakes\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"duration\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"internalType\":\"struct IStaking.Stake\",\"name\":\"accountStake\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"delegate\",\"type\":\"address\"}],\"name\":\"proposeDelegate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"proposedDelegates\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"delay\",\"type\":\"uint256\"}],\"name\":\"scheduleDurationChange\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"setDelegate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_duration\",\"type\":\"uint256\"}],\"name\":\"setDuration\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_symbol\",\"type\":\"string\"}],\"name\":\"setMetaData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"stake\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"stakeFor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"token\",\"outputs\":[{\"internalType\":\"contract ERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"delegate\",\"type\":\"address\"}],\"name\":\"unsetDelegate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"unstake\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]" ;
     #[doc = r" The parsed JSON-ABI of the contract."]
-    pub static STAKING_ABI: ethers::contract::Lazy<ethers::core::abi::Abi> =
+    pub static ISTAKING_ABI: ethers::contract::Lazy<ethers::core::abi::Abi> =
         ethers::contract::Lazy::new(|| {
             ethers::core::utils::__serde_json::from_str(__ABI).expect("invalid abi")
         });
-    pub struct Staking<M>(ethers::contract::Contract<M>);
-    impl<M> Clone for Staking<M> {
+    pub struct IStaking<M>(ethers::contract::Contract<M>);
+    impl<M> Clone for IStaking<M> {
         fn clone(&self) -> Self {
-            Staking(self.0.clone())
+            IStaking(self.0.clone())
         }
     }
-    impl<M> std::ops::Deref for Staking<M> {
+    impl<M> std::ops::Deref for IStaking<M> {
         type Target = ethers::contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
             &self.0
         }
     }
-    impl<M> std::fmt::Debug for Staking<M> {
+    impl<M> std::fmt::Debug for IStaking<M> {
         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-            f.debug_tuple(stringify!(Staking))
+            f.debug_tuple(stringify!(IStaking))
                 .field(&self.address())
                 .finish()
         }
     }
-    impl<M: ethers::providers::Middleware> Staking<M> {
+    impl<M: ethers::providers::Middleware> IStaking<M> {
         #[doc = r" Creates a new contract instance with the specified `ethers`"]
         #[doc = r" client at the given `Address`. The contract derefs to a `ethers::Contract`"]
         #[doc = r" object"]
@@ -49,7 +49,7 @@ pub mod staking {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            ethers::contract::Contract::new(address.into(), STAKING_ABI.clone(), client).into()
+            ethers::contract::Contract::new(address.into(), ISTAKING_ABI.clone(), client).into()
         }
         #[doc = "Calls the contract's `accountDelegates` (0x8f2318cb) function"]
         pub fn account_delegates(
@@ -300,11 +300,11 @@ pub mod staking {
             self.0.event()
         }
         #[doc = r" Returns an [`Event`](#ethers_contract::builders::Event) builder for all events of this contract"]
-        pub fn events(&self) -> ethers::contract::builders::Event<M, StakingEvents> {
+        pub fn events(&self) -> ethers::contract::builders::Event<M, IStakingEvents> {
             self.0.event_with_filter(Default::default())
         }
     }
-    impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>> for Staking<M> {
+    impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>> for IStaking<M> {
         fn from(contract: ethers::contract::Contract<M>) -> Self {
             Self(contract)
         }
@@ -423,7 +423,7 @@ pub mod staking {
         pub tokens: ethers::core::types::U256,
     }
     #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
-    pub enum StakingEvents {
+    pub enum IStakingEvents {
         CancelDurationChangeFilter(CancelDurationChangeFilter),
         CompleteDurationChangeFilter(CompleteDurationChangeFilter),
         OwnershipTransferredFilter(OwnershipTransferredFilter),
@@ -432,7 +432,7 @@ pub mod staking {
         SetDelegateFilter(SetDelegateFilter),
         TransferFilter(TransferFilter),
     }
-    impl ethers::contract::EthLogDecode for StakingEvents {
+    impl ethers::contract::EthLogDecode for IStakingEvents {
         fn decode_log(
             log: &ethers::core::abi::RawLog,
         ) -> ::std::result::Result<Self, ethers::core::abi::Error>
@@ -440,39 +440,39 @@ pub mod staking {
             Self: Sized,
         {
             if let Ok(decoded) = CancelDurationChangeFilter::decode_log(log) {
-                return Ok(StakingEvents::CancelDurationChangeFilter(decoded));
+                return Ok(IStakingEvents::CancelDurationChangeFilter(decoded));
             }
             if let Ok(decoded) = CompleteDurationChangeFilter::decode_log(log) {
-                return Ok(StakingEvents::CompleteDurationChangeFilter(decoded));
+                return Ok(IStakingEvents::CompleteDurationChangeFilter(decoded));
             }
             if let Ok(decoded) = OwnershipTransferredFilter::decode_log(log) {
-                return Ok(StakingEvents::OwnershipTransferredFilter(decoded));
+                return Ok(IStakingEvents::OwnershipTransferredFilter(decoded));
             }
             if let Ok(decoded) = ProposeDelegateFilter::decode_log(log) {
-                return Ok(StakingEvents::ProposeDelegateFilter(decoded));
+                return Ok(IStakingEvents::ProposeDelegateFilter(decoded));
             }
             if let Ok(decoded) = ScheduleDurationChangeFilter::decode_log(log) {
-                return Ok(StakingEvents::ScheduleDurationChangeFilter(decoded));
+                return Ok(IStakingEvents::ScheduleDurationChangeFilter(decoded));
             }
             if let Ok(decoded) = SetDelegateFilter::decode_log(log) {
-                return Ok(StakingEvents::SetDelegateFilter(decoded));
+                return Ok(IStakingEvents::SetDelegateFilter(decoded));
             }
             if let Ok(decoded) = TransferFilter::decode_log(log) {
-                return Ok(StakingEvents::TransferFilter(decoded));
+                return Ok(IStakingEvents::TransferFilter(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData)
         }
     }
-    impl ::std::fmt::Display for StakingEvents {
+    impl ::std::fmt::Display for IStakingEvents {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                StakingEvents::CancelDurationChangeFilter(element) => element.fmt(f),
-                StakingEvents::CompleteDurationChangeFilter(element) => element.fmt(f),
-                StakingEvents::OwnershipTransferredFilter(element) => element.fmt(f),
-                StakingEvents::ProposeDelegateFilter(element) => element.fmt(f),
-                StakingEvents::ScheduleDurationChangeFilter(element) => element.fmt(f),
-                StakingEvents::SetDelegateFilter(element) => element.fmt(f),
-                StakingEvents::TransferFilter(element) => element.fmt(f),
+                IStakingEvents::CancelDurationChangeFilter(element) => element.fmt(f),
+                IStakingEvents::CompleteDurationChangeFilter(element) => element.fmt(f),
+                IStakingEvents::OwnershipTransferredFilter(element) => element.fmt(f),
+                IStakingEvents::ProposeDelegateFilter(element) => element.fmt(f),
+                IStakingEvents::ScheduleDurationChangeFilter(element) => element.fmt(f),
+                IStakingEvents::SetDelegateFilter(element) => element.fmt(f),
+                IStakingEvents::TransferFilter(element) => element.fmt(f),
             }
         }
     }
@@ -808,7 +808,7 @@ pub mod staking {
         pub amount: ethers::core::types::U256,
     }
     #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
-    pub enum StakingCalls {
+    pub enum IStakingCalls {
         AccountDelegates(AccountDelegatesCall),
         Available(AvailableCall),
         BalanceOf(BalanceOfCall),
@@ -835,317 +835,317 @@ pub mod staking {
         UnsetDelegate(UnsetDelegateCall),
         Unstake(UnstakeCall),
     }
-    impl ethers::core::abi::AbiDecode for StakingCalls {
+    impl ethers::core::abi::AbiDecode for IStakingCalls {
         fn decode(
             data: impl AsRef<[u8]>,
         ) -> ::std::result::Result<Self, ethers::core::abi::AbiError> {
             if let Ok(decoded) =
                 <AccountDelegatesCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::AccountDelegates(decoded));
+                return Ok(IStakingCalls::AccountDelegates(decoded));
             }
             if let Ok(decoded) =
                 <AvailableCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::Available(decoded));
+                return Ok(IStakingCalls::Available(decoded));
             }
             if let Ok(decoded) =
                 <BalanceOfCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::BalanceOf(decoded));
+                return Ok(IStakingCalls::BalanceOf(decoded));
             }
             if let Ok(decoded) =
                 <CancelDurationChangeCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::CancelDurationChange(decoded));
+                return Ok(IStakingCalls::CancelDurationChange(decoded));
             }
             if let Ok(decoded) =
                 <DecimalsCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::Decimals(decoded));
+                return Ok(IStakingCalls::Decimals(decoded));
             }
             if let Ok(decoded) =
                 <DelegateAccountsCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::DelegateAccounts(decoded));
+                return Ok(IStakingCalls::DelegateAccounts(decoded));
             }
             if let Ok(decoded) =
                 <DurationCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::Duration(decoded));
+                return Ok(IStakingCalls::Duration(decoded));
             }
             if let Ok(decoded) =
                 <GetStakesCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::GetStakes(decoded));
+                return Ok(IStakingCalls::GetStakes(decoded));
             }
             if let Ok(decoded) = <NameCall as ethers::core::abi::AbiDecode>::decode(data.as_ref()) {
-                return Ok(StakingCalls::Name(decoded));
+                return Ok(IStakingCalls::Name(decoded));
             }
             if let Ok(decoded) = <OwnerCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::Owner(decoded));
+                return Ok(IStakingCalls::Owner(decoded));
             }
             if let Ok(decoded) =
                 <ProposeDelegateCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::ProposeDelegate(decoded));
+                return Ok(IStakingCalls::ProposeDelegate(decoded));
             }
             if let Ok(decoded) =
                 <ProposedDelegatesCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::ProposedDelegates(decoded));
+                return Ok(IStakingCalls::ProposedDelegates(decoded));
             }
             if let Ok(decoded) =
                 <RenounceOwnershipCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::RenounceOwnership(decoded));
+                return Ok(IStakingCalls::RenounceOwnership(decoded));
             }
             if let Ok(decoded) =
                 <ScheduleDurationChangeCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::ScheduleDurationChange(decoded));
+                return Ok(IStakingCalls::ScheduleDurationChange(decoded));
             }
             if let Ok(decoded) =
                 <SetDelegateCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::SetDelegate(decoded));
+                return Ok(IStakingCalls::SetDelegate(decoded));
             }
             if let Ok(decoded) =
                 <SetDurationCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::SetDuration(decoded));
+                return Ok(IStakingCalls::SetDuration(decoded));
             }
             if let Ok(decoded) =
                 <SetMetaDataCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::SetMetaData(decoded));
+                return Ok(IStakingCalls::SetMetaData(decoded));
             }
             if let Ok(decoded) = <StakeCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::Stake(decoded));
+                return Ok(IStakingCalls::Stake(decoded));
             }
             if let Ok(decoded) =
                 <StakeForCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::StakeFor(decoded));
+                return Ok(IStakingCalls::StakeFor(decoded));
             }
             if let Ok(decoded) = <SymbolCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::Symbol(decoded));
+                return Ok(IStakingCalls::Symbol(decoded));
             }
             if let Ok(decoded) = <TokenCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::Token(decoded));
+                return Ok(IStakingCalls::Token(decoded));
             }
             if let Ok(decoded) =
                 <TotalSupplyCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::TotalSupply(decoded));
+                return Ok(IStakingCalls::TotalSupply(decoded));
             }
             if let Ok(decoded) =
                 <TransferOwnershipCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::TransferOwnership(decoded));
+                return Ok(IStakingCalls::TransferOwnership(decoded));
             }
             if let Ok(decoded) =
                 <UnsetDelegateCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::UnsetDelegate(decoded));
+                return Ok(IStakingCalls::UnsetDelegate(decoded));
             }
             if let Ok(decoded) =
                 <UnstakeCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
             {
-                return Ok(StakingCalls::Unstake(decoded));
+                return Ok(IStakingCalls::Unstake(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData.into())
         }
     }
-    impl ethers::core::abi::AbiEncode for StakingCalls {
+    impl ethers::core::abi::AbiEncode for IStakingCalls {
         fn encode(self) -> Vec<u8> {
             match self {
-                StakingCalls::AccountDelegates(element) => element.encode(),
-                StakingCalls::Available(element) => element.encode(),
-                StakingCalls::BalanceOf(element) => element.encode(),
-                StakingCalls::CancelDurationChange(element) => element.encode(),
-                StakingCalls::Decimals(element) => element.encode(),
-                StakingCalls::DelegateAccounts(element) => element.encode(),
-                StakingCalls::Duration(element) => element.encode(),
-                StakingCalls::GetStakes(element) => element.encode(),
-                StakingCalls::Name(element) => element.encode(),
-                StakingCalls::Owner(element) => element.encode(),
-                StakingCalls::ProposeDelegate(element) => element.encode(),
-                StakingCalls::ProposedDelegates(element) => element.encode(),
-                StakingCalls::RenounceOwnership(element) => element.encode(),
-                StakingCalls::ScheduleDurationChange(element) => element.encode(),
-                StakingCalls::SetDelegate(element) => element.encode(),
-                StakingCalls::SetDuration(element) => element.encode(),
-                StakingCalls::SetMetaData(element) => element.encode(),
-                StakingCalls::Stake(element) => element.encode(),
-                StakingCalls::StakeFor(element) => element.encode(),
-                StakingCalls::Symbol(element) => element.encode(),
-                StakingCalls::Token(element) => element.encode(),
-                StakingCalls::TotalSupply(element) => element.encode(),
-                StakingCalls::TransferOwnership(element) => element.encode(),
-                StakingCalls::UnsetDelegate(element) => element.encode(),
-                StakingCalls::Unstake(element) => element.encode(),
+                IStakingCalls::AccountDelegates(element) => element.encode(),
+                IStakingCalls::Available(element) => element.encode(),
+                IStakingCalls::BalanceOf(element) => element.encode(),
+                IStakingCalls::CancelDurationChange(element) => element.encode(),
+                IStakingCalls::Decimals(element) => element.encode(),
+                IStakingCalls::DelegateAccounts(element) => element.encode(),
+                IStakingCalls::Duration(element) => element.encode(),
+                IStakingCalls::GetStakes(element) => element.encode(),
+                IStakingCalls::Name(element) => element.encode(),
+                IStakingCalls::Owner(element) => element.encode(),
+                IStakingCalls::ProposeDelegate(element) => element.encode(),
+                IStakingCalls::ProposedDelegates(element) => element.encode(),
+                IStakingCalls::RenounceOwnership(element) => element.encode(),
+                IStakingCalls::ScheduleDurationChange(element) => element.encode(),
+                IStakingCalls::SetDelegate(element) => element.encode(),
+                IStakingCalls::SetDuration(element) => element.encode(),
+                IStakingCalls::SetMetaData(element) => element.encode(),
+                IStakingCalls::Stake(element) => element.encode(),
+                IStakingCalls::StakeFor(element) => element.encode(),
+                IStakingCalls::Symbol(element) => element.encode(),
+                IStakingCalls::Token(element) => element.encode(),
+                IStakingCalls::TotalSupply(element) => element.encode(),
+                IStakingCalls::TransferOwnership(element) => element.encode(),
+                IStakingCalls::UnsetDelegate(element) => element.encode(),
+                IStakingCalls::Unstake(element) => element.encode(),
             }
         }
     }
-    impl ::std::fmt::Display for StakingCalls {
+    impl ::std::fmt::Display for IStakingCalls {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                StakingCalls::AccountDelegates(element) => element.fmt(f),
-                StakingCalls::Available(element) => element.fmt(f),
-                StakingCalls::BalanceOf(element) => element.fmt(f),
-                StakingCalls::CancelDurationChange(element) => element.fmt(f),
-                StakingCalls::Decimals(element) => element.fmt(f),
-                StakingCalls::DelegateAccounts(element) => element.fmt(f),
-                StakingCalls::Duration(element) => element.fmt(f),
-                StakingCalls::GetStakes(element) => element.fmt(f),
-                StakingCalls::Name(element) => element.fmt(f),
-                StakingCalls::Owner(element) => element.fmt(f),
-                StakingCalls::ProposeDelegate(element) => element.fmt(f),
-                StakingCalls::ProposedDelegates(element) => element.fmt(f),
-                StakingCalls::RenounceOwnership(element) => element.fmt(f),
-                StakingCalls::ScheduleDurationChange(element) => element.fmt(f),
-                StakingCalls::SetDelegate(element) => element.fmt(f),
-                StakingCalls::SetDuration(element) => element.fmt(f),
-                StakingCalls::SetMetaData(element) => element.fmt(f),
-                StakingCalls::Stake(element) => element.fmt(f),
-                StakingCalls::StakeFor(element) => element.fmt(f),
-                StakingCalls::Symbol(element) => element.fmt(f),
-                StakingCalls::Token(element) => element.fmt(f),
-                StakingCalls::TotalSupply(element) => element.fmt(f),
-                StakingCalls::TransferOwnership(element) => element.fmt(f),
-                StakingCalls::UnsetDelegate(element) => element.fmt(f),
-                StakingCalls::Unstake(element) => element.fmt(f),
+                IStakingCalls::AccountDelegates(element) => element.fmt(f),
+                IStakingCalls::Available(element) => element.fmt(f),
+                IStakingCalls::BalanceOf(element) => element.fmt(f),
+                IStakingCalls::CancelDurationChange(element) => element.fmt(f),
+                IStakingCalls::Decimals(element) => element.fmt(f),
+                IStakingCalls::DelegateAccounts(element) => element.fmt(f),
+                IStakingCalls::Duration(element) => element.fmt(f),
+                IStakingCalls::GetStakes(element) => element.fmt(f),
+                IStakingCalls::Name(element) => element.fmt(f),
+                IStakingCalls::Owner(element) => element.fmt(f),
+                IStakingCalls::ProposeDelegate(element) => element.fmt(f),
+                IStakingCalls::ProposedDelegates(element) => element.fmt(f),
+                IStakingCalls::RenounceOwnership(element) => element.fmt(f),
+                IStakingCalls::ScheduleDurationChange(element) => element.fmt(f),
+                IStakingCalls::SetDelegate(element) => element.fmt(f),
+                IStakingCalls::SetDuration(element) => element.fmt(f),
+                IStakingCalls::SetMetaData(element) => element.fmt(f),
+                IStakingCalls::Stake(element) => element.fmt(f),
+                IStakingCalls::StakeFor(element) => element.fmt(f),
+                IStakingCalls::Symbol(element) => element.fmt(f),
+                IStakingCalls::Token(element) => element.fmt(f),
+                IStakingCalls::TotalSupply(element) => element.fmt(f),
+                IStakingCalls::TransferOwnership(element) => element.fmt(f),
+                IStakingCalls::UnsetDelegate(element) => element.fmt(f),
+                IStakingCalls::Unstake(element) => element.fmt(f),
             }
         }
     }
-    impl ::std::convert::From<AccountDelegatesCall> for StakingCalls {
+    impl ::std::convert::From<AccountDelegatesCall> for IStakingCalls {
         fn from(var: AccountDelegatesCall) -> Self {
-            StakingCalls::AccountDelegates(var)
+            IStakingCalls::AccountDelegates(var)
         }
     }
-    impl ::std::convert::From<AvailableCall> for StakingCalls {
+    impl ::std::convert::From<AvailableCall> for IStakingCalls {
         fn from(var: AvailableCall) -> Self {
-            StakingCalls::Available(var)
+            IStakingCalls::Available(var)
         }
     }
-    impl ::std::convert::From<BalanceOfCall> for StakingCalls {
+    impl ::std::convert::From<BalanceOfCall> for IStakingCalls {
         fn from(var: BalanceOfCall) -> Self {
-            StakingCalls::BalanceOf(var)
+            IStakingCalls::BalanceOf(var)
         }
     }
-    impl ::std::convert::From<CancelDurationChangeCall> for StakingCalls {
+    impl ::std::convert::From<CancelDurationChangeCall> for IStakingCalls {
         fn from(var: CancelDurationChangeCall) -> Self {
-            StakingCalls::CancelDurationChange(var)
+            IStakingCalls::CancelDurationChange(var)
         }
     }
-    impl ::std::convert::From<DecimalsCall> for StakingCalls {
+    impl ::std::convert::From<DecimalsCall> for IStakingCalls {
         fn from(var: DecimalsCall) -> Self {
-            StakingCalls::Decimals(var)
+            IStakingCalls::Decimals(var)
         }
     }
-    impl ::std::convert::From<DelegateAccountsCall> for StakingCalls {
+    impl ::std::convert::From<DelegateAccountsCall> for IStakingCalls {
         fn from(var: DelegateAccountsCall) -> Self {
-            StakingCalls::DelegateAccounts(var)
+            IStakingCalls::DelegateAccounts(var)
         }
     }
-    impl ::std::convert::From<DurationCall> for StakingCalls {
+    impl ::std::convert::From<DurationCall> for IStakingCalls {
         fn from(var: DurationCall) -> Self {
-            StakingCalls::Duration(var)
+            IStakingCalls::Duration(var)
         }
     }
-    impl ::std::convert::From<GetStakesCall> for StakingCalls {
+    impl ::std::convert::From<GetStakesCall> for IStakingCalls {
         fn from(var: GetStakesCall) -> Self {
-            StakingCalls::GetStakes(var)
+            IStakingCalls::GetStakes(var)
         }
     }
-    impl ::std::convert::From<NameCall> for StakingCalls {
+    impl ::std::convert::From<NameCall> for IStakingCalls {
         fn from(var: NameCall) -> Self {
-            StakingCalls::Name(var)
+            IStakingCalls::Name(var)
         }
     }
-    impl ::std::convert::From<OwnerCall> for StakingCalls {
+    impl ::std::convert::From<OwnerCall> for IStakingCalls {
         fn from(var: OwnerCall) -> Self {
-            StakingCalls::Owner(var)
+            IStakingCalls::Owner(var)
         }
     }
-    impl ::std::convert::From<ProposeDelegateCall> for StakingCalls {
+    impl ::std::convert::From<ProposeDelegateCall> for IStakingCalls {
         fn from(var: ProposeDelegateCall) -> Self {
-            StakingCalls::ProposeDelegate(var)
+            IStakingCalls::ProposeDelegate(var)
         }
     }
-    impl ::std::convert::From<ProposedDelegatesCall> for StakingCalls {
+    impl ::std::convert::From<ProposedDelegatesCall> for IStakingCalls {
         fn from(var: ProposedDelegatesCall) -> Self {
-            StakingCalls::ProposedDelegates(var)
+            IStakingCalls::ProposedDelegates(var)
         }
     }
-    impl ::std::convert::From<RenounceOwnershipCall> for StakingCalls {
+    impl ::std::convert::From<RenounceOwnershipCall> for IStakingCalls {
         fn from(var: RenounceOwnershipCall) -> Self {
-            StakingCalls::RenounceOwnership(var)
+            IStakingCalls::RenounceOwnership(var)
         }
     }
-    impl ::std::convert::From<ScheduleDurationChangeCall> for StakingCalls {
+    impl ::std::convert::From<ScheduleDurationChangeCall> for IStakingCalls {
         fn from(var: ScheduleDurationChangeCall) -> Self {
-            StakingCalls::ScheduleDurationChange(var)
+            IStakingCalls::ScheduleDurationChange(var)
         }
     }
-    impl ::std::convert::From<SetDelegateCall> for StakingCalls {
+    impl ::std::convert::From<SetDelegateCall> for IStakingCalls {
         fn from(var: SetDelegateCall) -> Self {
-            StakingCalls::SetDelegate(var)
+            IStakingCalls::SetDelegate(var)
         }
     }
-    impl ::std::convert::From<SetDurationCall> for StakingCalls {
+    impl ::std::convert::From<SetDurationCall> for IStakingCalls {
         fn from(var: SetDurationCall) -> Self {
-            StakingCalls::SetDuration(var)
+            IStakingCalls::SetDuration(var)
         }
     }
-    impl ::std::convert::From<SetMetaDataCall> for StakingCalls {
+    impl ::std::convert::From<SetMetaDataCall> for IStakingCalls {
         fn from(var: SetMetaDataCall) -> Self {
-            StakingCalls::SetMetaData(var)
+            IStakingCalls::SetMetaData(var)
         }
     }
-    impl ::std::convert::From<StakeCall> for StakingCalls {
+    impl ::std::convert::From<StakeCall> for IStakingCalls {
         fn from(var: StakeCall) -> Self {
-            StakingCalls::Stake(var)
+            IStakingCalls::Stake(var)
         }
     }
-    impl ::std::convert::From<StakeForCall> for StakingCalls {
+    impl ::std::convert::From<StakeForCall> for IStakingCalls {
         fn from(var: StakeForCall) -> Self {
-            StakingCalls::StakeFor(var)
+            IStakingCalls::StakeFor(var)
         }
     }
-    impl ::std::convert::From<SymbolCall> for StakingCalls {
+    impl ::std::convert::From<SymbolCall> for IStakingCalls {
         fn from(var: SymbolCall) -> Self {
-            StakingCalls::Symbol(var)
+            IStakingCalls::Symbol(var)
         }
     }
-    impl ::std::convert::From<TokenCall> for StakingCalls {
+    impl ::std::convert::From<TokenCall> for IStakingCalls {
         fn from(var: TokenCall) -> Self {
-            StakingCalls::Token(var)
+            IStakingCalls::Token(var)
         }
     }
-    impl ::std::convert::From<TotalSupplyCall> for StakingCalls {
+    impl ::std::convert::From<TotalSupplyCall> for IStakingCalls {
         fn from(var: TotalSupplyCall) -> Self {
-            StakingCalls::TotalSupply(var)
+            IStakingCalls::TotalSupply(var)
         }
     }
-    impl ::std::convert::From<TransferOwnershipCall> for StakingCalls {
+    impl ::std::convert::From<TransferOwnershipCall> for IStakingCalls {
         fn from(var: TransferOwnershipCall) -> Self {
-            StakingCalls::TransferOwnership(var)
+            IStakingCalls::TransferOwnership(var)
         }
     }
-    impl ::std::convert::From<UnsetDelegateCall> for StakingCalls {
+    impl ::std::convert::From<UnsetDelegateCall> for IStakingCalls {
         fn from(var: UnsetDelegateCall) -> Self {
-            StakingCalls::UnsetDelegate(var)
+            IStakingCalls::UnsetDelegate(var)
         }
     }
-    impl ::std::convert::From<UnstakeCall> for StakingCalls {
+    impl ::std::convert::From<UnstakeCall> for IStakingCalls {
         fn from(var: UnstakeCall) -> Self {
-            StakingCalls::Unstake(var)
+            IStakingCalls::Unstake(var)
         }
     }
     #[doc = "Container type for all return fields from the `accountDelegates` function with signature `accountDelegates(address)` and selector `[143, 35, 24, 203]`"]
