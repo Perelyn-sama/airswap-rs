@@ -1,6 +1,6 @@
-use std::sync::Arc;
-use ethers::prelude::{builders::ContractCall, *};
 use crate::bindings::i_pool::i_pool::IPool;
+use ethers::prelude::{builders::ContractCall, *};
+use std::sync::Arc;
 #[derive(Debug)]
 pub struct Pool<M> {
     /// The Pool Airswap contract.
