@@ -4,12 +4,12 @@ use std::sync::Arc;
 
 #[derive(Debug)]
 pub struct Registry<M> {
-    /// The Registry Airswap contract.
+    /// The Registry contract.
     pub contract: IRegistry<M>,
 }
 
 impl<M> Registry<M> {
-    /// Returns a reference to the Airswap Regisry contract.
+    /// Returns a reference to the Registry contract.
     pub fn contract(&self) -> &IRegistry<M> {
         &self.contract
     }
@@ -29,7 +29,7 @@ impl<M: Middleware> Registry<M> {
     }
 
     /// Remove all tokens supported by the caller
-    pub fn remove_all_tokens(&self, tokens: Vec<Address>) -> ContractCall<M, ()> {
+    pub fn remove_all_tokens(&self) -> ContractCall<M, ()> {
         let registry = self.contract();
         registry.remove_all_tokens()
     }
