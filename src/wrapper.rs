@@ -1,4 +1,4 @@
-use crate::bindings::i_wrapper::i_wrapper::IWrapper;
+use crate::contracts::bindings::i_wrapper::i_wrapper::IWrapper;
 use ethers::prelude::{builders::ContractCall, *};
 use std::sync::Arc;
 

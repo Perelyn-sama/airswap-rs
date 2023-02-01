@@ -1,4 +1,4 @@
-use crate::bindings::i_registry::i_registry::IRegistry;
+use crate::contracts::bindings::i_registry::i_registry::IRegistry;
 use ethers::prelude::{builders::ContractCall, *};
 use std::sync::Arc;
 

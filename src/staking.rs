@@ -1,4 +1,4 @@
-use crate::bindings::i_staking::i_staking::IStaking;
+use crate::contracts::bindings::i_staking::i_staking::IStaking;
 use ethers::prelude::{builders::ContractCall, *};
 use std::sync::Arc;
 
