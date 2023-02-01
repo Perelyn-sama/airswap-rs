@@ -1,4 +1,4 @@
-use airswap_rs::common::constants::MAINNET_ADDRESS;
+use airswap_rs::contracts::addresses::try_contract;
 use airswap_rs::pool::Pool;
 
 use ethers::prelude::*;
@@ -16,9 +16,9 @@ async fn main() -> Result<()> {
 
     let client = Arc::new(signer_middleware);
 
-    let pool_address = MAINNET_ADDRESS.get(&"pool").unwrap();
+    let pool_address = try_contract("POOL").unwrap().address(Chain::Mainnet).unwrap();
 
-    let pool = Pool::new(client, *pool_address);
+    let pool = Pool::new(client, pool_address);
 
     let scale = pool.scale().await?;
     println!("The pool contract scale is - {}", scale);
