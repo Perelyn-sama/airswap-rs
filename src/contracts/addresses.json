@@ -1,0 +1,113 @@
+{
+  "BUSD": {
+    "addresses": {
+      "mainnet": "0x4fabb145d64652a948d72533023f6e7a623c7c53"
+    }
+  },
+  "DAI": {
+    "addresses": {
+      "mainnet": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "goerli": "0x11fE4B6AE13d2a6055C8D9cF65c55bac32B5d844"
+    }
+  },
+  "USDC": {
+    "addresses": {
+      "mainnet": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "goerli": "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+      "binance_smart_chain": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"
+    }
+  },
+  "USDT": {
+    "addresses": {
+      "mainnet": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+    }
+  },
+  "ETH": {
+    "addresses": {
+      "mainnet": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "rinkeby": "0xc778417E063141139Fce010982780140Aa0cD5Ab",
+      "ropsten": "0xc778417E063141139Fce010982780140Aa0cD5Ab",
+      "goerli": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",
+      "kovan": "0xd0A1E359811322d97991E03f863a0C30C2cF029C",
+      "optimism": "0x4200000000000000000000000000000000000006",
+      "optimism_kovan": "0x4200000000000000000000000000000000000006",
+      "arbitrum": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+      "binance_smart_chain": "0x2170Ed0880ac9A755fd29B2688956BD959F933F8"
+    }
+  },
+  "WETH": {
+    "addresses": {
+      "mainnet": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "rinkeby": "0xc778417E063141139Fce010982780140Aa0cD5Ab",
+      "ropsten": "0xc778417E063141139Fce010982780140Aa0cD5Ab",
+      "goerli": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",
+      "kovan": "0xd0A1E359811322d97991E03f863a0C30C2cF029C",
+      "optimism": "0x4200000000000000000000000000000000000006",
+      "optimism_kovan": "0x4200000000000000000000000000000000000006",
+      "arbitrum": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+      "binance_smart_chain": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "binance_smart_chain_testnet": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd"
+    }
+  },
+  "POOL": {
+    "addresses": {
+      "mainnet": "0xe2E7AE67E7ee6d4D90dfef945aB6dE6A14dB4c17",
+      "goerli": "0x62069Ff3b5127742B0D86b5fF5C6c21cF5e44154",
+      "binance_smart_chain": "0x16B57a5958271C479f64BC5F830DfC4f30ba2235",
+      "binance_smart_chain_testnet": "0x64888583E676368390D6eB573bC2AC3bCE9002B3",
+      "polygon": "0xb1b586afa8a2aab42826fb2ab9896cd0c686d0f4",
+      "arbitrum": "0xb1B586AfA8a2AaB42826Fb2Ab9896CD0c686d0F4",
+      "avalanche": "0xd3B6279cD6b21e92A6c53476E59a2C819018D6fE",
+      "arbitrum_goerli": "0x5E5A433cdfB14aB228c45E23251Ad83F7b1E3302"
+    }
+  },
+  "STAKING": {
+    "addresses": {
+      "mainnet": "0x6d88B09805b90dad911E5C5A512eEDd984D6860B",
+      "goerli": "0x4A2C0926f21723C56f6899dedbBb3DAE83A4C5dF",
+      "binance_smart_chain": "0xDECA72bDA0cDf62d79b46B1585B380c9C6d57D9E",
+      "binance_smart_chain_testnet": "0x4A2C0926f21723C56f6899dedbBb3DAE83A4C5dF",
+      "polygon": "0x71070c5607358fc25E3B4aaf4FB0a580c190252a",
+      "arbitrum": "0x71070c5607358fc25E3B4aaf4FB0a580c190252a",
+      "avalanche": "0x71070c5607358fc25E3B4aaf4FB0a580c190252a",
+      "arbitrum_goerli": "0xb1B586AfA8a2AaB42826Fb2Ab9896CD0c686d0F4"
+    }
+  },
+  "WRAPPER": {
+    "addresses": {
+      "mainnet": "0x5E5A433cdfB14aB228c45E23251Ad83F7b1E3302",
+      "goerli": "0x4de241E0FcE334b7ea3Fb8826158829e4741ab12",
+      "binance_smart_chain": "0xf54721F5C14CD6624b0cFeCa1EF9FF41C6E9bB2B",
+      "binance_smart_chain_testnet": "0xb1B586AfA8a2AaB42826Fb2Ab9896CD0c686d0F4",
+      "polygon": "0xB1F80291d0EB60b75E7DF9422FB942d8FC575F4d",
+      "arbitrum": "0xf54721F5C14CD6624b0cFeCa1EF9FF41C6E9bB2B",
+      "avalanche": "0x517d482F686f11b922EED764692f2b42663ce2fa",
+      "arbitrum_goerli": "0xB1F80291d0EB60b75E7DF9422FB942d8FC575F4d"
+    }
+  },
+  "RESGISTRY": {
+    "addresses": {
+      "mainnet": "0x8F9DA6d38939411340b19401E8c54Ea1f51B8f95",
+      "goerli": "0x05545815a5579d80Bd4c380da3487EAC2c4Ce299",
+      "binance_smart_chain": "0xaBF694A434E0fE3b951409C01aa2db50Af4D2E3A",
+      "binance_smart_chain_testnet": "0x05545815a5579d80Bd4c380da3487EAC2c4Ce299",
+      "polygon": "0x9F11691FA842856E44586380b27Ac331ab7De93d",
+      "arbitrum": "0xaBF694A434E0fE3b951409C01aa2db50Af4D2E3A",
+      "avalanche": "0xE40feb39fcb941A633deC965Abc9921b3FE962b2",
+      "arbitrum_goerli": "0x517d482F686f11b922EED764692f2b42663ce2fa"
+    }
+  },
+  "SWAP-ERC20": {
+    "addresses": {
+      "mainnet": "0xb1B586AfA8a2AaB42826Fb2Ab9896CD0c686d0F4",
+      "goerli": "0xE6E821F477f892C110A578517022629C5ef978b6",
+      "binance_smart_chain": "0xB1F80291d0EB60b75E7DF9422FB942d8FC575F4d",
+      "binance_smart_chain_testnet": "0x71070c5607358fc25E3B4aaf4FB0a580c190252a",
+      "polygon": "0xDECA72bDA0cDf62d79b46B1585B380c9C6d57D9E",
+      "arbitrum": "0x5E5A433cdfB14aB228c45E23251Ad83F7b1E3302",
+      "avalanche": "0x5E5A433cdfB14aB228c45E23251Ad83F7b1E3302",
+      "arbitrum_goerli": "0xDECA72bDA0cDf62d79b46B1585B380c9C6d57D9E"
+    }
+  }
+}
+
