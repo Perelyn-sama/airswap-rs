@@ -1,3 +1,4 @@
+//! Swap-erc20 contract
 use crate::contracts::bindings::i_swap_erc20::i_swap_erc20::ISwapERC20;
 use ethers::prelude::{builders::ContractCall, *};
 use std::sync::Arc;

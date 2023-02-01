@@ -1,3 +1,4 @@
+//! Pool Contract
 use crate::contracts::bindings::i_pool::i_pool::IPool;
 use ethers::prelude::{builders::ContractCall, *};
 use std::sync::Arc;

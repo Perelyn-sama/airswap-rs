@@ -1,3 +1,5 @@
+//! Constants
+
 #![allow(dead_code)]
 use ethers::types::Address;
 use once_cell::sync::Lazy;
