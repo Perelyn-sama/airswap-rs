@@ -38,8 +38,11 @@ version = "0.1.0"
 dependencies = [
  "ethers",
  "ethers-contract",
+ "ethers-core",
  "eyre",
  "once_cell",
+ "serde",
+ "serde_json",
  "tokio",
 ]
 
