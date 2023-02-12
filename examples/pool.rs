@@ -16,7 +16,10 @@ async fn main() -> Result<()> {
 
     let client = Arc::new(signer_middleware);
 
-    let pool_address = try_contract("POOL").unwrap().address(Chain::Mainnet).unwrap();
+    let pool_address = try_contract("POOL")
+        .unwrap()
+        .address(Chain::Mainnet)
+        .unwrap();
 
     let pool = Pool::new(client, pool_address);
 
