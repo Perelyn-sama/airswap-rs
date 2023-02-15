@@ -71,8 +71,8 @@ pub struct Order {
 }
 
 pub struct OrderParty {
-    wallet: Address,
-    token: Address,
+    pub wallet: Address,
+    pub token: Address,
     // identify kind variations and use them to make an enum
     pub kind: String,
     pub id: U256,
