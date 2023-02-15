@@ -20,7 +20,7 @@ pub const MAX_APPROVAL_AMOUNT: &str = "90071992547409910000000000";
 pub const MIN_CONFIRMATIONS: i32 = 2;
 pub const DEFAULT_PORT: i32 = 3000;
 pub const REQUEST_TIMEOUT: i32 = 4000;
-pub const SECONDS_IN_DAY: i32 = 86400;
+pub const SECONDS_IN_DAY: i64 = 86400;
 
 pub static MAINNET_ADDRESS: Lazy<HashMap<&str, Address>> = Lazy::new(|| {
     let mut hash_map = HashMap::new();
