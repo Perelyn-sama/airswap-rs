@@ -1,4 +1,4 @@
-use crate::common::constants::ADDRESS_ZERO;
+use crate::common::constants::{ADDRESS_ZERO, SECONDS_IN_DAY};
 use chrono::prelude::*;
 use ethers::prelude::*;
 
