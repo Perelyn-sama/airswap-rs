@@ -74,9 +74,21 @@ pub struct OrderParty {
     wallet: Address,
     token: Address,
     // identify kind variations and use them to make an enum
-    kind: String,
-    id: U256,
-    amount: U256,
+    pub kind: String,
+    pub id: U256,
+    pub amount: U256,
+}
+
+impl Default for OrderParty {
+    fn default() -> Self {
+        Self {
+            wallet: ADDRESS_ZERO.parse().unwrap(),
+            token: ADDRESS_ZERO.parse().unwrap(),
+            kind: "0x36372b07".to_string(),
+            id: U256::from(0),
+            amount: U256::from(0),
+        }
+    }
 }
 
 pub struct UnsignedClaim {
