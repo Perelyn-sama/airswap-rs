@@ -43,12 +43,26 @@ pub struct FullOrderERC20 {
 }
 
 pub struct UnsignedOrder {
-    nonce: U256,
-    expiry: U256,
-    protocol_fee: U256,
-    signer: OrderParty,
-    sender: OrderParty,
-    affiliate: OrderParty,
+    pub nonce: U256,
+    pub expiry: U256,
+    pub protocol_fee: U256,
+    pub signer: OrderParty,
+    pub sender: OrderParty,
+    pub affiliate: OrderParty,
+}
+
+impl Default for UnsignedOrder {
+    fn default() -> Self {
+        let unix_timestamp = Utc::now().timestamp();
+        Self {
+            nonce: U256::from(unix_timestamp),
+            expiry: U256::from(unix_timestamp / 1000 + SECONDS_IN_DAY),
+            protocol_fee: U256::from(0),
+            signer: OrderParty::default(),
+            sender: OrderParty::default(),
+            affiliate: OrderParty::default(),
+        }
+    }
 }
 
 pub struct Order {
