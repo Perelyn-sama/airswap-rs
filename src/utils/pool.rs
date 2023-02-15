@@ -1,7 +1,7 @@
 use crate::utils::types::UnsignedClaim;
 use ethers::prelude::*;
 
-fn create_claim(
+pub fn create_claim(
     nonce: Option<U256>,
     expiry: Option<U256>,
     participant: Option<Address>,
