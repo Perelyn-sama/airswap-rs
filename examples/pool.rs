@@ -3,7 +3,6 @@ use airswap_rs::pool::Pool;
 
 use ethers::prelude::*;
 use eyre::Result;
-use std::str::FromStr;
 use std::sync::Arc;
 
 #[tokio::main]
