@@ -1,11 +1,11 @@
 
 use crate::utils::types::{OrderParty, UnsignedOrder};
 use ethers::prelude::*;
-use ethers::{
-    types::{Address, Bytes, NameOrAddress},
-    signers::LocalWallet,
-    utils::{keccak256, TypedData},
-};
+// use ethers::{
+//     types::{Address, Bytes, NameOrAddress},
+//     signers::LocalWallet,
+//     utils::{keccak256, TypedData},
+// };
 
 pub fn create_order(
     nonce: Option<U256>,
@@ -30,9 +30,9 @@ pub fn create_order(
     }
 }
 
-pub fn create_order_signature(unsigned: UnsignedOrder, signer: LocalWallet, swap_contract: Address, chain_id: U256) -> Signature{
-    Signature::default()
-}
+// pub fn create_order_signature(unsigned: UnsignedOrder, signer: LocalWallet, swap_contract: Address, chain_id: U256) -> Signature{
+//     Signature::default()
+// }
 
 // export async function createOrderSignature(
 //     unsignedOrder: UnsignedOrder,
