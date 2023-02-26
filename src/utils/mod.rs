@@ -1,8 +1,8 @@
 //! Airswap smart contracts' utils.
 
 #[allow(dead_code)]
-mod pool;
+pub mod pool;
 #[allow(dead_code)]
-mod swap;
+pub mod swap;
 #[allow(dead_code)]
-mod types;
+pub mod types;
