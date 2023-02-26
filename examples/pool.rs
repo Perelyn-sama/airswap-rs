@@ -1,5 +1,4 @@
-use airswap_rs::contracts::addresses::try_contract;
-use airswap_rs::pool::Pool;
+use airswap_rs::prelude::*;
 
 use ethers::prelude::*;
 use eyre::Result;
