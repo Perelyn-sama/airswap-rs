@@ -1,6 +1,6 @@
 [package]
 name = "airswap-rs"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 authors = ["Perelyn"]
 description = "Rust SDK library for the Airswap smart contracts."
