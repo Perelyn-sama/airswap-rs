@@ -12,7 +12,7 @@ airswap-rs = { git = "https://github.com/Perelyn-sama/airswap-rs" }
 And this to your code:
 
 ```rust
-use airswap::prelude::*;
+use airswap_rs::prelude::*;
 ```
 
 ## Examples
