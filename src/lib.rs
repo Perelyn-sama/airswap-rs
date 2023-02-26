@@ -19,7 +19,7 @@ pub mod prelude {
         staking::Staking,
         swap_erc20::SwapERC20,
         utils::{pool::create_claim, swap::create_order},
-        wrapper::Wrapper
+        wrapper::Wrapper,
     };
 
     #[cfg(feature = "addresses")]
