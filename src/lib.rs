@@ -22,6 +22,22 @@ pub mod prelude {
         wrapper::Wrapper,
     };
 
+    use ethers::{
+        abi::Detokenize,
+        prelude::{builders::ContractCall, *},
+    };
+    use eyre::ContextCompat;
+
+    pub async fn send<M: Middleware + 'static, D: Detokenize>(
+        call: ContractCall<M, D>,
+    ) -> eyre::Result<TransactionReceipt> {
+        let pending_tx = call.send().await?;
+        println!("Transaction sent successfully, awaiting inclusion...");
+        pending_tx
+            .await?
+            .wrap_err("transaction was dropped from mempool")
+    }
+
     #[cfg(feature = "addresses")]
     pub use super::contracts::addresses::{address, contract, try_address, try_contract};
 }
