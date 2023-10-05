@@ -1,3 +1,5 @@
+//! Simple example on how to use the library to call methods on the airswap contracts
+
 use airswap_rs::prelude::*;
 
 use ethers::prelude::*;
@@ -22,6 +24,7 @@ async fn main() -> Result<()> {
     let pool = Pool::new(client, pool_address);
 
     let scale = pool.scale().await?;
+
     println!("The pool contract scale is - {}", scale);
 
     Ok(())
